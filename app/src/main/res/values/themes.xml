@@ -10,7 +10,7 @@
     <style name="Theme.YaFood" parent="Base.Theme.YaFood">
         <item name="materialButtonStyle">@style/YaFood.Button</item>
         <item name="bottomNavigationStyle">@style/YaFood.BottomNavigation</item>
-        <item name="floatingActionButtonStyle">@style/ScanButton</item>
+        <item name="floatingActionButtonStyle">@style/FabScan</item>
     </style>
 
     <style name="YaFood.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
@@ -30,7 +30,7 @@
         <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="ScanButton" parent="Widget.Design.FloatingActionButton">
+    <style name="FabScan" parent="Widget.Design.FloatingActionButton">
         <item name="backgroundTint">@color/white</item>
     </style>
 </resources>

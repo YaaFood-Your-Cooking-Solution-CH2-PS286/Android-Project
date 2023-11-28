@@ -8,5 +8,7 @@
     <color name="primary500">#FFEBBA54</color>
     <color name="primary100">#FFFEF7DD</color>
 
+    <color name="neutral900">#FF202020</color>
+    <color name="neutral800">#FF424242</color>
     <color name="neutral300">#FFE0E0E0</color>
 </resources>

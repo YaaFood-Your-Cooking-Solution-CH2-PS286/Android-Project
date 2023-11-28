@@ -3,6 +3,7 @@ package com.capstone.yafood.screen
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.capstone.yafood.data.repository.UserRepository
 import com.capstone.yafood.screen.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val application: Application) :
@@ -25,7 +26,8 @@ class ViewModelFactory private constructor(private val application: Application)
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel() as T
+            val userRepository = UserRepository.getInstance(application)
+            return HomeViewModel(userRepository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

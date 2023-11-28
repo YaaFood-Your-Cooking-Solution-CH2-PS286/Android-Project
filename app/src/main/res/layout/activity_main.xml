@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    app:layoutDescription="@xml/activity_main_scene"
+    tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/circle_background"
         android:layout_width="500dp"
         android:layout_height="500dp"
         android:src="@drawable/circle_shape"
