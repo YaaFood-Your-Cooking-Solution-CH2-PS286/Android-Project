@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/search_menu"
+        android:icon="@drawable/ic_search"
+        android:title="Search" />
+    <item
+        android:id="@+id/add_post_menu"
+        android:icon="@drawable/ic_add_post"
+        android:title="Upload" />
+    <item
+        android:id="@+id/community_menu"
+        android:icon="@drawable/ic_community"
+        android:title="Community" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_person_circle"
+        android:title="Upload" />
+</menu>

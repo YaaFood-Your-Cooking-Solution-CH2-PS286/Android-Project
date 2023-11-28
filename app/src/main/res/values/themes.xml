@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.YaFood" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/primary500</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="Theme.YaFood" parent="Base.Theme.YaFood">
+        <item name="materialButtonStyle">@style/YaFood.Button</item>
+        <item name="bottomNavigationStyle">@style/YaFood.BottomNavigation</item>
+        <item name="floatingActionButtonStyle">@style/ScanButton</item>
+    </style>
+
+    <style name="YaFood.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@drawable/bottom_navigation_bg</item>
+        <item name="labelVisibilityMode">unlabeled</item>
+        <item name="itemIconSize">28dp</item>
+    </style>
+
+    <style name="YaFood.Button" parent="Widget.Material3.Button">
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="shapeAppearance">@style/RoundedButton</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="RoundedButton" parent="ShapeAppearance.Material3.Corner.Medium">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ScanButton" parent="Widget.Design.FloatingActionButton">
+        <item name="backgroundTint">@color/white</item>
+    </style>
+</resources>
