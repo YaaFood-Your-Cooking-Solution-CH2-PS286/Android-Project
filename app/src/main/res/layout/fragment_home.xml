@@ -37,18 +37,17 @@
         app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
     <TextView
-        android:textColor="@color/neutral800"
         android:id="@+id/rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="Pemasak Handal(3020)"
+        android:textColor="@color/neutral800"
         app:layout_constraintBottom_toBottomOf="@+id/rank_icon"
         app:layout_constraintStart_toEndOf="@+id/rank_icon"
         app:layout_constraintTop_toTopOf="@+id/rank_icon" />
 
     <TextView
-        android:textColor="@color/neutral900"
         android:id="@+id/tagline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,6 +55,7 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins"
         android:text="@string/tagline"
+        android:textColor="@color/neutral900"
         android:textFontWeight="600"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,14 +63,39 @@
         app:layout_constraintTop_toBottomOf="@+id/rank" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_open_camera"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_gravity="center"
         android:layout_marginTop="12dp"
         android:src="@drawable/ic_scan"
+        app:fabCustomSize="72dp"
         app:layout_constraintEnd_toEndOf="@+id/tagline"
         app:layout_constraintStart_toStartOf="@+id/tagline"
         app:layout_constraintTop_toBottomOf="@+id/tagline"
-        android:layout_gravity="center"
-        app:maxImageSize="40dp"
-        app:fabCustomSize="72dp"/>
+        app:maxImageSize="40dp" />
+
+    <TextView
+        android:id="@+id/newest_article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/section_article_newest"
+        android:textFontWeight="600"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_open_camera" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_articles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newest_article"
+        tools:listitem="@layout/item_article"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

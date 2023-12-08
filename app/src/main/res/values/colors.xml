@@ -4,11 +4,14 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#FFFBFBFB</color>
 
+    <color name="primary900">#FF704410</color>
     <color name="primary600">#FFCA973D</color>
     <color name="primary500">#FFEBBA54</color>
+    <color name="primary400">#FFF3D07D</color>
     <color name="primary100">#FFFEF7DD</color>
 
     <color name="neutral900">#FF202020</color>
     <color name="neutral800">#FF424242</color>
+    <color name="neutral500">#FF9E9E9E</color>
     <color name="neutral300">#FFE0E0E0</color>
 </resources>

@@ -13,6 +13,17 @@
         <item name="floatingActionButtonStyle">@style/FabScan</item>
     </style>
 
+    <!--    <style name="Theme.YaFood.WithActionBar" parent="Theme.YaFood">-->
+    <!--        <item name="windowActionBar">true</item>-->
+    <!--        <item name="windowNoTitle">false</item>-->
+    <!--        <item name="homeAsUpIndicator">@drawable/ic_back</item>-->
+    <!--        <item name="android:actionBarStyle">@style/YaFood.ActionBarStyle</item>-->
+    <!--    </style>-->
+
+    <style name="YaFood.ActionBarStyle" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="background">@color/primary500</item>
+    </style>
+
     <style name="YaFood.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:background">@drawable/bottom_navigation_bg</item>
         <item name="labelVisibilityMode">unlabeled</item>
@@ -33,4 +44,5 @@
     <style name="FabScan" parent="Widget.Design.FloatingActionButton">
         <item name="backgroundTint">@color/white</item>
     </style>
+
 </resources>

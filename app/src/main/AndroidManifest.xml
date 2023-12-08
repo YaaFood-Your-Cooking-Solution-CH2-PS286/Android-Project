@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,8 +19,18 @@
         android:theme="@style/Theme.YaFood"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".screen.snapcook.PreviewSnapActivity"
             android:exported="false" />
+        <activity
+            android:name=".screen.recomendation.RecomendationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screen.snapcook.SnapCookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".BasicActivity"
             android:exported="true">

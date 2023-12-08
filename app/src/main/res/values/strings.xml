@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">YaFood</string>
+    <string name="recomendation_screen_label">Rekomendasi Resep</string>
     <string name="tagline">Dapatkan Resep Kreatif Tanpa Ribet!</string>
     <string name="profile">AntonioChef</string>
     <string name="settings">settings\n</string>
+    <string name="shot_tips">shot tips</string>
+    <string name="section_article_newest">Artikel masakan hari ini</string>
+    <string name="find_recipe">Cari Resep</string>
+    <string name="section_you_article">Artikel kamu</string>
+
+    <string name="dummy_article_title">Nasi Goreng Megalodon </string>
+    <string name="dummy_article_user">Bagus Sudirman</string>
 </resources>

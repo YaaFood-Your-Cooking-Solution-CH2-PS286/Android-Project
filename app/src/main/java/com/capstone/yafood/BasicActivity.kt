@@ -11,7 +11,6 @@ class BasicActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBasicBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
         binding?.let {
             it.toHome.setOnClickListener {
                 startActivity(Intent(this, MainActivity::class.java))
