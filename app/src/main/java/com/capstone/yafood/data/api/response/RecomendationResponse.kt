@@ -1,5 +1,7 @@
 package com.capstone.yafood.data.api.response
 
+import com.capstone.yafood.data.entity.Ingredient
+import com.capstone.yafood.data.entity.Recipe
 import com.google.gson.annotations.SerializedName
 
 data class RecomendationResponse(
@@ -13,5 +15,6 @@ data class RecomendationResponse(
 )
 
 data class RecomendationResult(
-    val recipe: List<String>
+    val ingredientDetected:List<Ingredient>,
+    val recipe: List<Recipe>
 )

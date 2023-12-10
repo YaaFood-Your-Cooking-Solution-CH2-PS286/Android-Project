@@ -11,12 +11,16 @@
         <item name="materialButtonStyle">@style/YaFood.Button</item>
         <item name="bottomNavigationStyle">@style/YaFood.BottomNavigation</item>
         <item name="floatingActionButtonStyle">@style/FabScan</item>
+        <item name="android:textViewStyle">@style/Dark.TextView</item>
     </style>
 
-<!--    <style name="Theme.YaFood.WithActionBar" parent="Theme.YaFood">-->
-<!--        <item name="windowActionBar">true</item>-->
-<!--        <item name="android:actionBarStyle">@style/Widget.AppCompat.ActionBar.Solid</item>-->
-<!--    </style>-->
+    <style name="Dark.TextView" parent="TextAppearance.AppCompat.Widget.TextView.SpinnerItem">
+        <!--        <item name="color">@color/primary400</item>-->
+    </style>
+    <!--    <style name="Theme.YaFood.WithActionBar" parent="Theme.YaFood">-->
+    <!--        <item name="windowActionBar">true</item>-->
+    <!--        <item name="android:actionBarStyle">@style/Widget.AppCompat.ActionBar.Solid</item>-->
+    <!--    </style>-->
 
     <style name="YaFood.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="background">@drawable/bottom_navigation_bg</item>
@@ -36,6 +40,6 @@
     </style>
 
     <style name="FabScan" parent="Widget.Design.FloatingActionButton">
-        <item name="backgroundTint">@color/neutral300</item>
+        <item name="backgroundTint">@color/primary600</item>
     </style>
 </resources>

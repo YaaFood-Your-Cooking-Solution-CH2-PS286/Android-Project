@@ -1,6 +1,7 @@
 package com.capstone.yafood.data.api
 
 import com.capstone.yafood.data.api.response.RecomendationResponse
+import com.capstone.yafood.data.entity.Ingredient
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Multipart
@@ -14,4 +15,8 @@ interface ApiService {
         @Part image: MultipartBody.Part
     ): Call<RecomendationResponse>
 
+    @POST("/recomendation/ingredient")
+    fun getRecomendationFromIngredient(
+        @Part ingredients: List<Ingredient>
+    ): Call<RecomendationResponse>
 }

@@ -11,9 +11,8 @@
         android:icon="@drawable/ic_search"
         android:title="Search" />
     <item
-        android:id="@+id/add_post_menu"
-        android:icon="@drawable/ic_add_post"
-        android:title="Upload" />
+        android:id="@+id/placeholder"
+        android:title="" />
     <item
         android:id="@+id/community_menu"
         android:icon="@drawable/ic_community"
@@ -21,5 +20,5 @@
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person_circle"
-        android:title="Upload" />
+        android:title="Profile" />
 </menu>

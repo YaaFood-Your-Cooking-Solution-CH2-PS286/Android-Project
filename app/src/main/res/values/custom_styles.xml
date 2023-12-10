@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="circular_shape">
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="section_style" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textFontWeight">600</item>
+        <item name="color">@color/neutral900</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="rounded_shape_4">
+        <item name="cornerSize">4dp</item>
     </style>
 </resources>

@@ -50,6 +50,28 @@ class HomeFragment : Fragment() {
             }
         }
 
+        viewModel.getRecipeIdea().observe(viewLifecycleOwner) {
+            //set ingredient
+            Glide.with(this).load(it.ingredient.imageUrl).into(bind.ingredientImage)
+            bind.ingredientTitle.text =
+                requireActivity().resources.getString(R.string.recipe_of, it.ingredient.name)
+
+            if (it.recipes.isNotEmpty()) {
+                val firstRecipe = it.recipes[0] ?: null
+                val secondRecipe = it.recipes[1] ?: null
+                //set first recipe
+                firstRecipe?.let {
+                    Glide.with(this).load(firstRecipe.imageUrl).into(bind.imageOfFirstRecipe)
+                    bind.titleOfFirstRecipe.text = firstRecipe.name
+                }
+                //set second recipe
+                secondRecipe?.let {
+                    Glide.with(this).load(secondRecipe.imageUrl).into(bind.imageOfSecondRecipe)
+                    bind.titleOfSecondRecipe.text = secondRecipe.name
+                }
+            }
+        }
+
         viewModel.getNewestArticles().observe(viewLifecycleOwner) {
             bind.rvArticles.adapter = ArticleAdapter(it)
         }
@@ -59,9 +81,6 @@ class HomeFragment : Fragment() {
     private fun setupComponent() {
         binding?.let {
             viewmodelObserve(it)
-            it.btnOpenCamera.setOnClickListener {
-                startActivity(Intent(requireActivity(), SnapCookActivity::class.java))
-            }
             it.rvArticles.apply {
                 layoutManager =
                     LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
@@ -69,4 +88,5 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 }

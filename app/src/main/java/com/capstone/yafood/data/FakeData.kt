@@ -1,6 +1,10 @@
 package com.capstone.yafood.data
 
+import com.capstone.yafood.data.api.response.RecomendationResult
 import com.capstone.yafood.data.entity.Article
+import com.capstone.yafood.data.entity.Ingredient
+import com.capstone.yafood.data.entity.Recipe
+import com.capstone.yafood.data.entity.RecipeIdea
 import com.capstone.yafood.data.entity.User
 
 object FakeData {
@@ -12,6 +16,30 @@ object FakeData {
         }
 
         return list
+    }
+
+    fun dummyRecipeIdea(): RecipeIdea {
+        val list = ArrayList<Recipe>()
+        for (i in 1..2) {
+            list.add(dummyRecipe(i))
+        }
+        return RecipeIdea(
+            Ingredient(
+                "Telur",
+                "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            ),
+            list,
+        )
+    }
+
+    fun dummyRecipe(id: Int): Recipe {
+        return Recipe(
+            id,
+            "Telur Setengah Masak",
+            "Telur",
+            "Rebus saja 7 menit",
+            "https://images.unsplash.com/photo-1610328466269-1f36faad83c1?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        )
     }
 
     private fun dummyUserArticle(id: Int = 0): Article = Article(
@@ -47,6 +75,34 @@ object FakeData {
             3022,
             photoUrl
                 ?: "https://images.unsplash.com/photo-1583394293214-28ded15ee548?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        )
+    }
+
+    fun dummyRecomendationResult(): RecomendationResult {
+        val recipes = ArrayList<Recipe>()
+        for (i in 1..3) {
+            recipes.add(
+                Recipe(
+                    i,
+                    "Nasi Tumis Megalodon",
+                    "Telur, nasi, udang, daging ayam, bawang merah, bawang putih",
+                    "Tumis bawang hingga wangi",
+                    "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                )
+            )
+        }
+        return RecomendationResult(
+            listOf(
+                Ingredient(
+                    "Telur",
+                    "https://images.unsplash.com/photo-1587486913049-53fc88980cfc?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                ),
+                Ingredient(
+                    "Nasi",
+                    "https://plus.unsplash.com/premium_photo-1675814316651-3ce3c6409922?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                )
+            ),
+            recipes
         )
     }
 }
