@@ -6,11 +6,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
-    companion object{
-        private const val BASE_URL = ""
+    companion object {
+        private const val BASE_URL = "https://dd7b-103-190-46-135.ngrok-free.app"
 
         private var token = ""
-        fun setToken(newtoken:String){
+        fun setToken(newtoken: String) {
             token = newtoken
         }
 

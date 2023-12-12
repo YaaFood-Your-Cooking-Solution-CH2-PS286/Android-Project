@@ -1,5 +1,6 @@
 package com.capstone.yafood.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,9 +22,9 @@ class ArticleAdapter(
 
     override fun onBindViewHolder(holder: ArticleAdapter.ViewHolder, position: Int) {
         val article = listArticles[position]
-
+        Log.d("GetDailyArticles", listArticles.toString())
         holder.apply {
-            binding.username.text = article.userCreated.username
+            binding.username.text = article.userCreated.name
             Glide.with(itemView.context)
                 .load(article.userCreated.photoUrl)
                 .error(R.drawable.ic_person_circle)

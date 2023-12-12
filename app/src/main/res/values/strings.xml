@@ -6,16 +6,20 @@
     <string name="settings">settings\n</string>
     <string name="shot_tips">shot tips</string>
     <string name="section_article_newest">Artikel masakan hari ini</string>
+    <string name="section_popular_communities">Komunitas Populer</string>
     <string name="section_recipe_idea">Ide resep hari ini</string>
     <string name="find_recipe">Cari Resep</string>
     <string name="recipe_of">Resep Olahan %s</string>
     <string name="section_you_article">Artikel kamu</string>
     <string name="section_ingredient">Bahan</string>
+    <string name="section_step">Langkah</string>
     <string name="section_recipe_recomendation">Ide Resep</string>
     <string name="error_get_recomendation">Yah...gabisa minta rekomendasi nih :(</string>
     <string name="btn_add_desc">Tambah Bahan</string>
     <string name="btn_cancel">Batal</string>
     <string name="snap_instruction">Posisikan bahan di tengah frame</string>
+    <string name="find_other_article">Temukan artikel lainnya</string>
+    <string name="find_other_community">Temukan komunitas lainnya</string>
 
     <string name="dummy_article_title">Nasi Goreng Megalodon </string>
     <string name="dummy_article_user">Bagus Sudirman</string>
@@ -25,4 +29,8 @@
     <string name="open_gallery">Buka Gallery</string>
     <string name="capture">capture</string>
     <string name="icon_show_tips">icon show tips</string>
+    <string name="divider">divider</string>
+    <string name="section_give_feedback">Beri feedback pada hasil rekomendasi</string>
+    <string name="hint_give_feedback">Beri feedback</string>
+    <string name="back_button">back button</string>
 </resources>

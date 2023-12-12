@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.capstone.yafood.data.FakeData
 import com.capstone.yafood.data.api.response.RecomendationResult
+import com.capstone.yafood.data.entity.Recipe
 import com.capstone.yafood.data.entity.RecipeIdea
 
 class RecipeRepository {
@@ -14,9 +15,12 @@ class RecipeRepository {
         return liveData
     }
 
-//    fun getRecomendationRecipe():LiveData<RecomendationResult>{
-//        val liveData = MutableLiveData<Rec>
-//    }
+    fun getRecipeDetail(recipeId: Int): LiveData<Recipe> {
+        val liveData = MutableLiveData<Recipe>()
+        liveData.value = FakeData.dummyRecipe(recipeId)
+        return liveData
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: RecipeRepository? = null

@@ -2,6 +2,7 @@ package com.capstone.yafood.data
 
 import com.capstone.yafood.data.api.response.RecomendationResult
 import com.capstone.yafood.data.entity.Article
+import com.capstone.yafood.data.entity.Community
 import com.capstone.yafood.data.entity.Ingredient
 import com.capstone.yafood.data.entity.Recipe
 import com.capstone.yafood.data.entity.RecipeIdea
@@ -36,8 +37,8 @@ object FakeData {
         return Recipe(
             id,
             "Telur Setengah Masak",
-            "Telur",
-            "Rebus saja 7 menit",
+            listOf("Telur", "Garam"),
+            listOf("Rebus saja 7 menit", "Kupas Telur"),
             "https://images.unsplash.com/photo-1610328466269-1f36faad83c1?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         )
     }
@@ -46,7 +47,11 @@ object FakeData {
         id,
         "Nasi Tumis Megalodon",
         "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        dummyUserData()
+        dummyUserData(),
+        0,
+        0,
+        "",
+        ""
     )
 
     fun dummyListArticles(): List<Article> {
@@ -64,7 +69,8 @@ object FakeData {
         dummyUserData(
             username = "bagusx123",
             photoUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1998&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        )
+        ),
+        0, 0, "", ""
     )
 
     fun dummyUserData(username: String? = null, photoUrl: String? = null): User {
@@ -85,8 +91,8 @@ object FakeData {
                 Recipe(
                     i,
                     "Nasi Tumis Megalodon",
-                    "Telur, nasi, udang, daging ayam, bawang merah, bawang putih",
-                    "Tumis bawang hingga wangi",
+                    listOf("Telur, nasi, udang, daging ayam, bawang merah, bawang putih"),
+                    listOf("Tumis bawang hingga wangi"),
                     "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 )
             )
@@ -104,5 +110,30 @@ object FakeData {
             ),
             recipes
         )
+    }
+
+    fun dummyCommunities(): List<Community> {
+        val list = ArrayList<Community>()
+        list.add(
+            Community(
+                name = "Classic Food",
+                photoUrl = "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                users = listOf(
+                    dummyUserData(photoUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                    dummyUserData(photoUrl = "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                )
+            )
+        )
+        list.add(
+            Community(
+                name = "Asian Food",
+                photoUrl = "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                users = listOf(
+                    dummyUserData(photoUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                    dummyUserData(photoUrl = "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                )
+            )
+        )
+        return list
     }
 }

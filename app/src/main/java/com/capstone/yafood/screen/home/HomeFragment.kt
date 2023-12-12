@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.capstone.yafood.R
 import com.capstone.yafood.adapter.ArticleAdapter
+import com.capstone.yafood.adapter.CommunityAdapter
 import com.capstone.yafood.databinding.FragmentHomeBinding
 import com.capstone.yafood.screen.ViewModelFactory
 import com.capstone.yafood.screen.snapcook.SnapCookActivity
@@ -75,6 +76,10 @@ class HomeFragment : Fragment() {
         viewModel.getNewestArticles().observe(viewLifecycleOwner) {
             bind.rvArticles.adapter = ArticleAdapter(it)
         }
+
+        viewModel.getCommunities().observe(viewLifecycleOwner) {
+            bind.rvCommunities.adapter = CommunityAdapter(it)
+        }
     }
 
 
@@ -85,6 +90,11 @@ class HomeFragment : Fragment() {
                 layoutManager =
                     LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
                 addItemDecoration(ListSpaceDecoration(24))
+            }
+
+            it.rvCommunities.apply {
+                layoutManager = LinearLayoutManager(requireActivity())
+                addItemDecoration(ListSpaceDecoration(verticalSpacing = 16))
             }
         }
     }

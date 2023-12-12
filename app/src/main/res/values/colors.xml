@@ -12,6 +12,7 @@
 
     <color name="neutral900">#FF202020</color>
     <color name="neutral800">#FF424242</color>
+    <color name="neutral700">#FF616161</color>
     <color name="neutral500">#FF9E9E9E</color>
     <color name="neutral300">#FFE0E0E0</color>
 </resources>

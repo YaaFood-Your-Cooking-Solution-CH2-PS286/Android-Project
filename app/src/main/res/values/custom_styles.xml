@@ -5,10 +5,27 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="section" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textFontWeight">600</item>
+        <item name="color">@color/neutral900</item>
+    </style>
+
     <style name="section_style" parent="Widget.MaterialComponents.TextView">
         <item name="android:textFontWeight">600</item>
         <item name="color">@color/neutral900</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="h3_style" parent="section">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="h4_style" parent="section">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="VariantButton" parent="Widget.Material3.Button">
+        <item name="background">@drawable/variant_primary_bg</item>
     </style>
 
     <style name="rounded_shape_4">
