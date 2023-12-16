@@ -8,19 +8,23 @@ import com.capstone.yafood.data.entity.Recipe
 import com.capstone.yafood.data.entity.User
 import com.capstone.yafood.data.repository.RecipeRepository
 import com.capstone.yafood.data.repository.UserRepository
+import com.capstone.yafood.utils.UserState
 
 class RecipeDetailViewModel(
     private val recipeRepository: RecipeRepository,
     private val userRepository: UserRepository
 ) : ViewModel() {
     private val recipeId = MutableLiveData<Int>()
-    val user = MutableLiveData<User>()
+    val userState = MutableLiveData<UserState<User>>()
+
     init {
-        user.value = userRepository.getUserDetail()
+        userRepository.getUserDetail(userState)
     }
-    fun setRecipeId(id:Int){
+
+    fun setRecipeId(id: Int) {
         recipeId.value = id
     }
+
     fun getDetailRecipe(): LiveData<Recipe> = recipeId.switchMap {
         recipeRepository.getRecipeDetail(it)
     }

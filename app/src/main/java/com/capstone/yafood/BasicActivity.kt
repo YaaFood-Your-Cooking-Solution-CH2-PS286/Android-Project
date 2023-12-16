@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.capstone.yafood.databinding.ActivityBasicBinding
+import com.capstone.yafood.screen.auth.AuthActivity
+import com.capstone.yafood.screen.createarticle.CreateArticleActivity
 
 class BasicActivity : AppCompatActivity() {
     private var binding: ActivityBasicBinding? = null
@@ -15,7 +17,12 @@ class BasicActivity : AppCompatActivity() {
             it.toHome.setOnClickListener {
                 startActivity(Intent(this, MainActivity::class.java))
             }
-            it.toLogin
+            it.toLogin.setOnClickListener {
+                startActivity(Intent(this, AuthActivity::class.java))
+            }
+            it.toCreateArticle.setOnClickListener {
+                startActivity(Intent(this, CreateArticleActivity::class.java))
+            }
         }
     }
 

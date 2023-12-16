@@ -13,6 +13,7 @@ import com.capstone.yafood.adapter.UnorderListAdapter
 import com.capstone.yafood.databinding.ActivityRecipeDetailBinding
 import com.capstone.yafood.screen.ViewModelFactory
 import com.capstone.yafood.utils.RECIPE_ID
+import com.capstone.yafood.utils.UserState
 
 class RecipeDetailActivity : AppCompatActivity() {
 
@@ -37,11 +38,13 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     private fun viewModelObserver(bind: ActivityRecipeDetailBinding) {
-        viewModel.user.observe(this) {
-            Glide.with(this)
-                .load(it.photoUrl)
-                .placeholder(R.drawable.ic_person_circle)
-                .into(bind.userPhotoProfile)
+        viewModel.userState.observe(this) {
+            if (it is UserState.Success) {
+                Glide.with(this)
+                    .load(it.data.photoUrl)
+                    .placeholder(R.drawable.ic_person_circle)
+                    .into(bind.userPhotoProfile)
+            }
         }
         viewModel.getDetailRecipe().observe(this) {
             Glide.with(this).load(it.imageUrl)

@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class User(
     val id: Int,
-    val username: String,
+    val email: String,
     val name: String,
-    val rankPoints: Int,
+    val rankPoints: Int = 0,
     @field:SerializedName("imageUrl")
     val photoUrl: String? = null
 )

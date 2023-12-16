@@ -29,42 +29,4 @@ class SnapViewModel(
     fun setImageUri(imageUri: String) {
         _imageUri.value = imageUri
     }
-
-    fun submitImage() {
-        imageUri.value?.let { image ->
-            _uiState.value = UiState.Loading
-
-            val imageFile = uriToFile(image.toUri(), application)
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-
-            val multipartBody = MultipartBody.Part.createFormData(
-                "image",
-                imageFile.name,
-                requestImageFile
-            )
-
-            val client = ApiConfig.getApiService().getRecomendation(multipartBody)
-            client.enqueue(object : Callback<RecomendationResponse> {
-                override fun onResponse(
-                    call: Call<RecomendationResponse>,
-                    response: Response<RecomendationResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            _uiState.value = UiState.Success(it.result)
-                        }
-                    } else {
-                        _uiState.value = UiState.Error(response.message())
-                        Log.e("SubmitImage", response.message())
-                    }
-                }
-
-                override fun onFailure(call: Call<RecomendationResponse>, t: Throwable) {
-                    _uiState.value = UiState.Error(t.message.toString())
-                    Log.e("SubmitImage", t.message.toString())
-                }
-
-            })
-        }
-    }
 }

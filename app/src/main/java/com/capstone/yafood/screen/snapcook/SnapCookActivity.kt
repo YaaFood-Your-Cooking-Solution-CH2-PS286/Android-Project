@@ -7,9 +7,12 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.AspectRatio.RATIO_4_3
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -91,11 +94,13 @@ class SnapCookActivity : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(binding?.previewView?.surfaceProvider)
+                    it.setSurfaceProvider(binding.previewView.surfaceProvider)
                 }
 
-            imageCapture = ImageCapture.Builder().build()
-
+            imageCapture =
+                ImageCapture.Builder().setTargetAspectRatio(RATIO_4_3).build()
+//            imageCapture =
+//                ImageCapture.Builder().setTargetResolution(Size(1280, 1280)).build()
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
@@ -122,6 +127,7 @@ class SnapCookActivity : AppCompatActivity() {
         val photoFile = ImageUtils.createCustomTempFile(application)
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
 
         imageCapture.takePicture(
             outputOptions,

@@ -6,15 +6,19 @@ import com.google.gson.annotations.SerializedName
 
 data class RecomendationResponse(
     @field:SerializedName("success")
-    val success: Boolean,
+    val success: String,
 
     @field:SerializedName("msg")
     val message: String,
 
+    @field:SerializedName("data")
     val result: RecomendationResult
 )
 
 data class RecomendationResult(
-    val ingredientDetected: List<Ingredient>,
+    @field:SerializedName("ingredient_detected")
+    val ingredientDetected: List<String>,
+
+    @field:SerializedName("recipe")
     val recipe: List<Recipe>
 )

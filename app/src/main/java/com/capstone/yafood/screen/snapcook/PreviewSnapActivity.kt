@@ -45,6 +45,7 @@ class PreviewSnapActivity : AppCompatActivity() {
 
     private fun startToRecomendation() {
         val toRecomendation = Intent(this, RecomendationActivity::class.java)
+        toRecomendation.putExtra(RESULT_SNAP, snapViewModel.imageUri.value)
         startActivity(toRecomendation)
         finish()
     }

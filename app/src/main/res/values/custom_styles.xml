@@ -31,4 +31,9 @@
     <style name="rounded_shape_4">
         <item name="cornerSize">4dp</item>
     </style>
+
+    <style name="TextButton" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="colorControlHighlight">@color/primary100</item>
+    </style>
 </resources>

@@ -9,20 +9,19 @@
     android:paddingHorizontal="4dp"
     android:paddingVertical="2dp">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/image"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/rounded_shape_4"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/image"-->
+<!--        android:layout_width="22dp"-->
+<!--        android:layout_height="22dp"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        app:shapeAppearanceOverlay="@style/rounded_shape_4"-->
+<!--        tools:srcCompat="@tools:sample/backgrounds/scenic" />-->
 
     <TextView
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="4dp"
         android:text="@string/dummy_ingredient"
         android:textColor="@color/primary900"
         android:textSize="14sp" />

@@ -2,7 +2,7 @@
     <string name="app_name">YaFood</string>
     <string name="recomendation_screen_label">Rekomendasi Resep</string>
     <string name="tagline">Dapatkan Resep Kreatif Tanpa Ribet!</string>
-    <string name="profile">AntonioChef</string>
+    <string name="profile">Profile</string>
     <string name="settings">settings\n</string>
     <string name="shot_tips">shot tips</string>
     <string name="section_article_newest">Artikel masakan hari ini</string>
@@ -11,15 +11,22 @@
     <string name="find_recipe">Cari Resep</string>
     <string name="recipe_of">Resep Olahan %s</string>
     <string name="section_you_article">Artikel kamu</string>
-    <string name="section_ingredient">Bahan</string>
+    <string name="section_ingredient">Bahan-bahan</string>
     <string name="section_step">Langkah</string>
     <string name="section_recipe_recomendation">Ide Resep</string>
     <string name="error_get_recomendation">Yah...gabisa minta rekomendasi nih :(</string>
+    <string name="timeout_get_recomendation">Gambar ga bisa dibaca nih :(</string>
     <string name="btn_add_desc">Tambah Bahan</string>
     <string name="btn_cancel">Batal</string>
     <string name="snap_instruction">Posisikan bahan di tengah frame</string>
     <string name="find_other_article">Temukan artikel lainnya</string>
     <string name="find_other_community">Temukan komunitas lainnya</string>
+    <string name="success_create_article">Pembuatan artikel berhasil!</string>
+    <string name="failed_create_article">Gagal mengunggah artikel!</string>
+    <string name="failed_register">Gagal untuk melakukan pendaftaran!</string>
+    <string name="failed_login">Email atau password salah!</string>
+    <string name="success_login">Login Berhasil? Hello %s</string>
+    <string name="success_register">Berhasil melakukan pendaftaran! Silahkan melakukan login</string>
 
     <string name="dummy_article_title">Nasi Goreng Megalodon </string>
     <string name="dummy_article_user">Bagus Sudirman</string>
@@ -33,4 +40,32 @@
     <string name="section_give_feedback">Beri feedback pada hasil rekomendasi</string>
     <string name="hint_give_feedback">Beri feedback</string>
     <string name="back_button">back button</string>
+    <string name="post_button">Post Button</string>
+    <string name="add_article_image">Tambahkan gambar artikel</string>
+    <string name="title_input_placeholder">Judul: Tempe orak-arik</string>
+    <string name="description_input_placeholder">Deskripsikan tentang makanan ini. Tentang asal masakan ini? manfaat dari makanan? kandungan gizi?</string>
+    <string name="ingredient_input_placeholder">100gram tempe</string>
+    <string name="delete_ingredient">delete ingredient</string>
+    <string name="add_bahan_input">Bahan</string>
+    <string name="add_steps_input">Langkah</string>
+    <string name="step_input_placeholder">Potong tempe</string>
+    <string name="input_email_placeholder">email</string>
+    <string name="input_password_placeholder">password</string>
+    <string name="tab_login">Login</string>
+    <string name="tab_register">Register</string>
+    <string name="login_to_account">Masuk ke akunmu</string>
+    <string name="login_benefit">Buat artikel, gabung komunitas, dan lainnya</string>
+    <string name="password_and_confPassword_not_same">Password dan Confirm Password Tidak Sama</string>
+    <string name="input_name_placeholder">nama</string>
+    <string name="login">Login</string>
+    <string name="input_conf_password_placeholder">konfirmasi password</string>
+    <string name="register">Register</string>
+    <string name="not_have_article">Anda belum memiliki artikel</string>
+    <string name="create_aticle">Tulis Artikel</string>
+    <string name="retake_photo">Foto ulang</string>
+    <string name="input_ingredient">Tulis bahan</string>
+    <string name="add_ingredients">Tambah Bahan</string>
+    <string name="search_recipe">Cari Resep</string>
+    <string name="cant_remove_ingredient">Tidak dapat menghapus bahan terakhir</string>
+
 </resources>

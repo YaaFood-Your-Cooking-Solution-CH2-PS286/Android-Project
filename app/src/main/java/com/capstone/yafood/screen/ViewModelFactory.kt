@@ -7,11 +7,15 @@ import com.capstone.yafood.data.repository.ArticleRepository
 import com.capstone.yafood.data.repository.CommunityRepository
 import com.capstone.yafood.data.repository.RecipeRepository
 import com.capstone.yafood.data.repository.UserRepository
+import com.capstone.yafood.screen.auth.AuthViewModel
+import com.capstone.yafood.screen.createarticle.CreateArticleViewModel
 import com.capstone.yafood.screen.home.HomeViewModel
 import com.capstone.yafood.screen.profile.ProfileViewModel
 import com.capstone.yafood.screen.recipedetail.RecipeDetailViewModel
+import com.capstone.yafood.screen.recomendation.AddIngredientsViewModel
 import com.capstone.yafood.screen.recomendation.RecomendationViewModel
 import com.capstone.yafood.screen.snapcook.SnapViewModel
+import com.capstone.yafood.screen.splash.SplashViewModel
 
 class ViewModelFactory private constructor(private val application: Application) :
     ViewModelProvider.NewInstanceFactory() {
@@ -65,6 +69,22 @@ class ViewModelFactory private constructor(private val application: Application)
                 val userRepository = UserRepository.getInstance(application)
 
                 return RecipeDetailViewModel(recipeRepository, userRepository) as T
+            }
+
+            (modelClass.isAssignableFrom(CreateArticleViewModel::class.java)) -> {
+                return CreateArticleViewModel(application) as T
+            }
+
+            (modelClass.isAssignableFrom(AuthViewModel::class.java)) -> {
+                return AuthViewModel(application) as T
+            }
+
+            (modelClass.isAssignableFrom(SplashViewModel::class.java)) -> {
+                return SplashViewModel(application) as T
+            }
+
+            (modelClass.isAssignableFrom(AddIngredientsViewModel::class.java)) -> {
+                return AddIngredientsViewModel() as T
             }
         }
 

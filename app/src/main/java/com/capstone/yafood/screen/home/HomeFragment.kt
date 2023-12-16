@@ -1,6 +1,7 @@
 package com.capstone.yafood.screen.home
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.capstone.yafood.databinding.FragmentHomeBinding
 import com.capstone.yafood.screen.ViewModelFactory
 import com.capstone.yafood.screen.snapcook.SnapCookActivity
 import com.capstone.yafood.utils.ListSpaceDecoration
+import com.capstone.yafood.utils.UserState
 
 class HomeFragment : Fragment() {
 
@@ -39,15 +41,40 @@ class HomeFragment : Fragment() {
     }
 
     private fun viewmodelObserve(bind: FragmentHomeBinding) {
-        viewModel.userData.observe(viewLifecycleOwner) {
-            bind.userName.text = it.username
+        viewModel.userState.observe(viewLifecycleOwner) {
+            when (it) {
+                UserState.Loading -> {
+                    bind.loadingProfile.visibility = View.VISIBLE
+                }
 
-            if (it.photoUrl != null) {
-                Glide.with(this)
-                    .load(it.photoUrl)
-                    .error(R.drawable.ic_person_circle)
-                    .placeholder(requireActivity().getDrawable(R.drawable.ic_person_circle))
-                    .into(bind.userPhotoProfile)
+                is UserState.Success -> {
+                    bind.loadingProfile.visibility = View.GONE
+                    bind.userInfo.visibility = View.VISIBLE
+                    bind.appLogo.visibility = View.GONE
+
+                    bind.userName.text = it.data.email
+
+                    Glide.with(this)
+                        .load(it.data.photoUrl ?: "")
+                        .error(R.drawable.ic_person_circle)
+                        .placeholder(requireActivity().getDrawable(R.drawable.ic_person_circle))
+                        .into(bind.userPhotoProfile)
+                    bind.userName.text = it.data.name
+
+                    if (it.data.photoUrl != null) {
+                        Glide.with(this)
+                            .load(it.data.photoUrl)
+                            .error(R.drawable.ic_person_circle)
+                            .placeholder(requireActivity().getDrawable(R.drawable.ic_person_circle))
+                            .into(bind.userPhotoProfile)
+                    }
+                }
+
+                UserState.Unauthorized -> {
+                    bind.loadingProfile.visibility = View.GONE
+                    bind.userInfo.visibility = View.GONE
+                    bind.appLogo.visibility = View.VISIBLE
+                }
             }
         }
 

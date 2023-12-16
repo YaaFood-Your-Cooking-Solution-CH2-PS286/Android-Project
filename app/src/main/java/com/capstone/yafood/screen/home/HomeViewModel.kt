@@ -11,6 +11,7 @@ import com.capstone.yafood.data.repository.ArticleRepository
 import com.capstone.yafood.data.repository.CommunityRepository
 import com.capstone.yafood.data.repository.RecipeRepository
 import com.capstone.yafood.data.repository.UserRepository
+import com.capstone.yafood.utils.UserState
 
 class HomeViewModel(
     private val userRepository: UserRepository,
@@ -18,8 +19,8 @@ class HomeViewModel(
     private val recipeRepository: RecipeRepository,
     private val communityRepository: CommunityRepository
 ) : ViewModel() {
-    private val _userData = MutableLiveData<User>()
-    val userData: LiveData<User> get() = _userData
+    private val _userState = MutableLiveData<UserState<User>>()
+    val userState: LiveData<UserState<User>> get() = _userState
     fun getNewestArticles(): LiveData<List<Article>> = articleRepository.getDailyArticles()
 
     fun getRecipeIdea(): LiveData<RecipeIdea> = recipeRepository.getRecipeIdea()
@@ -27,7 +28,7 @@ class HomeViewModel(
     fun getCommunities(): LiveData<List<Community>> = communityRepository.getRandomCommunity()
 
     init {
-        _userData.value = userRepository.getUserDetail()
+        userRepository.getUserDetail(_userState)
     }
 
 }

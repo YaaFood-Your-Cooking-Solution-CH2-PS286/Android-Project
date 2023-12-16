@@ -11,10 +11,17 @@ import com.capstone.yafood.databinding.ButtonAddIngredientBinding
 import com.capstone.yafood.databinding.ItemIngredientBinding
 
 class IngredientAdapter(
-    private val listIngredients: List<Ingredient>
+    private val listIngredients: List<String>,
+    private val handleAddButton: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class ItemViewHolder(val binding: ItemIngredientBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+        lateinit var getIngredient: String
+        fun bind(ingredient: String) {
+            getIngredient = ingredient
+            binding.label.text = ingredient
+        }
+    }
 
     inner class ButtonAddViewHolder(val binding: ButtonAddIngredientBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -49,20 +56,18 @@ class IngredientAdapter(
     override fun getItemCount(): Int = listIngredients.size + 1
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         when (getItemViewType(position)) {
             R.layout.item_ingredient -> {
                 (holder as ItemViewHolder).apply {
                     val ingredient = listIngredients[position]
-                    Glide.with(holder.itemView).load(ingredient.imageUrl).into(binding.image)
-                    binding.label.text = ingredient.name
+                    bind(ingredient)
                 }
             }
 
             R.layout.button_add_ingredient -> {
                 (holder as ButtonAddViewHolder).apply {
                     itemView.setOnClickListener {
-                        Toast.makeText(itemView.context, "Test Tamba", Toast.LENGTH_SHORT).show()
+                        handleAddButton()
                     }
                 }
             }

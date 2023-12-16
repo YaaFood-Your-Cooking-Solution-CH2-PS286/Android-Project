@@ -43,6 +43,6 @@
             android:lines="2"
             android:text="@string/dummy_list_ingredients"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
