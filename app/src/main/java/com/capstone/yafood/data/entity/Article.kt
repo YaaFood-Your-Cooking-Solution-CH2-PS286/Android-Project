@@ -13,5 +13,7 @@ data class Article(
     val commentCount: Int = 0,
     val description: String,
     @field:SerializedName("contentArtikel")
-    val contentArticle: String
+    val contentArticle: String,
+    val ingredients: List<String>,
+    val procedure: List<String>
 )

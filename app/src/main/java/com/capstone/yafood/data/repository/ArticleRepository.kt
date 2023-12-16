@@ -8,6 +8,7 @@ import com.capstone.yafood.data.FakeData
 import com.capstone.yafood.data.api.ApiConfig
 import com.capstone.yafood.data.api.response.ArticleResponse
 import com.capstone.yafood.data.entity.Article
+import com.capstone.yafood.data.entity.Recipe
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +23,12 @@ class ArticleRepository {
     fun getUserArticles(): LiveData<List<Article>> {
         val liveData = MutableLiveData<List<Article>>()
         liveData.value = FakeData.dummyListUserArtciles()
+        return liveData
+    }
+
+    fun getArticleDetail(articleId: Int): LiveData<Article> {
+        val liveData = MutableLiveData<Article>()
+        liveData.value = FakeData.dummyArticle(articleId)
         return liveData
     }
 

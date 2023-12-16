@@ -19,6 +19,9 @@
         android:theme="@style/Theme.YaFood"
         tools:targetApi="31">
         <activity
+            android:name=".screen.articledetail.ArticleDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.recipedetail.RecipeDetailActivity"
             android:exported="false" />
         <activity

@@ -7,6 +7,7 @@ import com.capstone.yafood.data.repository.ArticleRepository
 import com.capstone.yafood.data.repository.CommunityRepository
 import com.capstone.yafood.data.repository.RecipeRepository
 import com.capstone.yafood.data.repository.UserRepository
+import com.capstone.yafood.screen.articledetail.ArticleDetailViewModel
 import com.capstone.yafood.screen.home.HomeViewModel
 import com.capstone.yafood.screen.profile.ProfileViewModel
 import com.capstone.yafood.screen.recipedetail.RecipeDetailViewModel
@@ -58,6 +59,13 @@ class ViewModelFactory private constructor(private val application: Application)
 
             (modelClass.isAssignableFrom(RecomendationViewModel::class.java)) -> {
                 return RecomendationViewModel(application) as T
+            }
+
+            (modelClass.isAssignableFrom(ArticleDetailViewModel::class.java)) -> {
+                val ArticleRepository = ArticleRepository.getInstance()
+                val userRepository = UserRepository.getInstance(application)
+
+                return ArticleDetailViewModel(ArticleRepository, userRepository) as T
             }
 
             (modelClass.isAssignableFrom(RecipeDetailViewModel::class.java)) -> {
