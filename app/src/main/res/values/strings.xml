@@ -30,6 +30,7 @@
 
     <string name="dummy_article_title">Nasi Goreng Megalodon </string>
     <string name="dummy_article_user">Bagus Sudirman</string>
+    <string name="dummy_article_description">Nasi goreng yang sangat amat teramat mantap sekali</string>
     <string name="dummy_ingredient">Telur</string>
     <string name="dummy_list_ingredients">Telur, nasi, bawang merah, kentang, bawang putih, minyak goreng, udang</string>
     <string name="preview_image">Preview Image</string>
@@ -67,5 +68,8 @@
     <string name="add_ingredients">Tambah Bahan</string>
     <string name="search_recipe">Cari Resep</string>
     <string name="cant_remove_ingredient">Tidak dapat menghapus bahan terakhir</string>
-
+    <string name="section_give_comment">Komentar</string>
+    <string name="searchbar_hint">Search</string>
+    <string name="hint_give_comment">Beri Komentar</string>
+    <string name="user_name">Bagus</string>
 </resources>

@@ -51,7 +51,9 @@ object FakeData {
         0,
         0,
         "",
-        ""
+        "",
+        listOf("Telur", "Garam"),
+        listOf("Rebus saja 7 menit", "Kupas Telur"),
     )
 
     fun dummyListArticles(): List<Article> {
@@ -62,7 +64,7 @@ object FakeData {
         return list
     }
 
-    private fun dummyArticle(id: Int = 0): Article = Article(
+    fun dummyArticle(id: Int = 0): Article = Article(
         id,
         "Nasi Tumis Megalodon",
         "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -70,7 +72,11 @@ object FakeData {
             username = "bagusx123",
             photoUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1998&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         ),
-        0, 0, "", ""
+        0, 0,
+        "Nasi goreng yang sangat amat teramat mantap sekali",
+        "",
+        listOf("Telur", "Garam"),
+        listOf("Rebus saja 7 menit", "Kupas Telur"),
     )
 
     fun dummyUserData(username: String? = null, photoUrl: String? = null): User {

@@ -1,11 +1,16 @@
 package com.capstone.yafood.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.yafood.data.entity.Article
 import com.capstone.yafood.databinding.ItemUserArticleBinding
+import com.capstone.yafood.screen.articledetail.ArticleDetailActivity
+import com.capstone.yafood.screen.recipedetail.RecipeDetailActivity
+import com.capstone.yafood.utils.ARTICLE_ID
+import com.capstone.yafood.utils.RECIPE_ID
 
 class UserArticleAdapter(
     private val listUserArticle: List<Article>
@@ -32,6 +37,11 @@ class UserArticleAdapter(
             binding.commentCount.text = userArticle.commentCount.toString()
             binding.articleTitle.text = userArticle.title
             Glide.with(holder.itemView).load(userArticle.imageUrl).into(binding.articleImage)
+            itemView.setOnClickListener {
+                val toDetail = Intent(itemView.context, ArticleDetailActivity::class.java)
+                toDetail.putExtra(ARTICLE_ID, userArticle.id)
+                itemView.context.startActivity(toDetail)
+            }
         }
     }
 
