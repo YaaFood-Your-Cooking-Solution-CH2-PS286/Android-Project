@@ -25,7 +25,7 @@
     <string name="failed_create_article">Gagal mengunggah artikel!</string>
     <string name="failed_register">Gagal untuk melakukan pendaftaran!</string>
     <string name="failed_login">Email atau password salah!</string>
-    <string name="success_login">Login Berhasil? Hello %s</string>
+    <string name="success_login">Login Berhasil! Hello %s</string>
     <string name="success_register">Berhasil melakukan pendaftaran! Silahkan melakukan login</string>
 
     <string name="dummy_article_title">Nasi Goreng Megalodon </string>

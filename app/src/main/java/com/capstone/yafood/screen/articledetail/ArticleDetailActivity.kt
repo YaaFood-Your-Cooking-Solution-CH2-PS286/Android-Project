@@ -14,6 +14,7 @@ import com.capstone.yafood.databinding.ActivityRecipeDetailBinding
 import com.capstone.yafood.screen.ViewModelFactory
 import com.capstone.yafood.screen.recipedetail.RecipeDetailViewModel
 import com.capstone.yafood.utils.RECIPE_ID
+import com.capstone.yafood.utils.UserState
 
 class ArticleDetailActivity : AppCompatActivity() {
 
@@ -21,6 +22,7 @@ class ArticleDetailActivity : AppCompatActivity() {
     private val viewModel by viewModels<ArticleDetailViewModel> {
         ViewModelFactory.getInstance(application)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityArticleDetailBinding.inflate(layoutInflater)
@@ -38,10 +40,12 @@ class ArticleDetailActivity : AppCompatActivity() {
 
     private fun viewModelObserver(bind: ActivityArticleDetailBinding) {
         viewModel.user.observe(this) {
-            Glide.with(this)
-                .load(it.photoUrl)
-                .placeholder(R.drawable.ic_person_circle)
-                .into(bind.userPhotoProfile)
+            if (it is UserState.Success) {
+                Glide.with(this)
+                    .load(it.data.photoUrl)
+                    .placeholder(R.drawable.ic_person_circle)
+                    .into(bind.userPhotoProfile)
+            }
         }
         viewModel.getDetailArticle().observe(this) {
             Glide.with(this).load(it.imageUrl)

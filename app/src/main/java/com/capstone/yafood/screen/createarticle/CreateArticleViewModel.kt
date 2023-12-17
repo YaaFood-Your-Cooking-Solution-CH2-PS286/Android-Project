@@ -86,45 +86,51 @@ class CreateArticleViewModel(
         )
 
         //Just for testing, still waiting API
-        viewModelScope.launch(Dispatchers.Main) {
-            delay(1000)
-            _uiState.value = UiState.Success("App Work")
-        }
-//        imageUri.value?.let {
-//            val imageFile = ImageUtils.uriToFile(it.toUri(), application)
-//
-//            val reqFile = MultipartBody.Part.createFormData(
-//                "file",
-//                imageFile.name,
-//                imageFile.asRequestBody("image/jpg".toMediaType())
-//            )
-//
-//            val client = ApiConfig.getApiService().postArticle(
-//                image = reqFile,
-//                title = title.asRequestBody(),
-//                description = description.asRequestBody(),
-//                ingredient = ingredients.asRequestBody(),
-//                step = steps.asRequestBody()
-//            )
-//
-//            client.enqueue(object : Callback<PostArticleResponse> {
-//                override fun onResponse(
-//                    call: Call<PostArticleResponse>,
-//                    response: Response<PostArticleResponse>
-//                ) {
-//                    if(response.isSuccessful){
-//                        _uiState.value = UiState.Success(application.getString(R.string.success_create_article))
-//                    }
-//                    _uiState.value = UiState.Error(application.getString(R.string.failed_create_article))
-//                }
-//
-//                override fun onFailure(call: Call<PostArticleResponse>, t: Throwable) {
-//                    Log.e(TAG, t.message.toString())
-//                    _uiState.value = UiState.Error(application.getString(R.string.failed_create_article))
-//                }
-//
-//            })
+//        viewModelScope.launch(Dispatchers.Main) {
+//            delay(1000)
+//            _uiState.value = UiState.Success("App Work")
 //        }
+        imageUri.value?.let {
+            val imageFile = ImageUtils.uriToFile(it.toUri(), application)
+
+            val reqFile = MultipartBody.Part.createFormData(
+                "file",
+                imageFile.name,
+                imageFile.asRequestBody("image/jpg".toMediaType())
+            )
+
+            val client = ApiConfig.getApiService().postArticle(
+                image = reqFile,
+                title = title.asRequestBody(),
+                description = description.asRequestBody(),
+                ingredients = ingredients.asRequestBody(),
+                steps = steps.asRequestBody()
+            )
+
+            client.enqueue(object : Callback<PostArticleResponse> {
+                override fun onResponse(
+                    call: Call<PostArticleResponse>,
+                    response: Response<PostArticleResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.i(TAG, "Success : ${response.body()}")
+                        _uiState.value =
+                            UiState.Success(application.getString(R.string.success_create_article))
+                    } else {
+                        Log.e(TAG, "Error ${response.code()}: ${response.errorBody()?.string()}")
+                        _uiState.value =
+                            UiState.Error(application.getString(R.string.failed_create_article))
+                    }
+                }
+
+                override fun onFailure(call: Call<PostArticleResponse>, t: Throwable) {
+                    Log.e(TAG, t.message.toString())
+                    _uiState.value =
+                        UiState.Error(application.getString(R.string.failed_create_article))
+                }
+
+            })
+        }
     }
 
     companion object {

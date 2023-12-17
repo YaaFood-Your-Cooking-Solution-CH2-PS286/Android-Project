@@ -72,10 +72,9 @@ class RecomendationActivity : AppCompatActivity() {
         viewModel.uiState.observe(this) { state ->
             when (state) {
                 UiState.Loading -> {
-                    binding.loadingContainer.visibility = View.VISIBLE
+                    setSearchView(true)
                     setVisibleErrorView(false)
                     binding.contentContainer.visibility = View.INVISIBLE
-                    setSearchView(true)
                 }
 
                 is UiState.Error -> {
@@ -135,21 +134,26 @@ class RecomendationActivity : AppCompatActivity() {
     private fun setSearchView(isVisible: Boolean) {
         if (isVisible) {
             val postY = binding.searchAnim.translationY
-            searchAnim = ObjectAnimator.ofFloat(
-                binding.searchAnim,
-                View.TRANSLATION_Y,
-                postY,
-                postY - 70
-            ).apply {
-                duration = 800
-                repeatCount = ObjectAnimator.INFINITE
-                repeatMode = ObjectAnimator.REVERSE
-                interpolator = AccelerateDecelerateInterpolator()
-                start()
+            if (searchAnim == null) {
+                searchAnim = ObjectAnimator.ofFloat(
+                    binding.searchAnim,
+                    View.TRANSLATION_Y,
+                    postY,
+                    postY - 70
+                ).apply {
+                    duration = 800
+                    repeatCount = ObjectAnimator.INFINITE
+                    repeatMode = ObjectAnimator.REVERSE
+                    interpolator = AccelerateDecelerateInterpolator()
+                    start()
+                }
+            } else {
+                searchAnim?.let { it.resume() }
             }
+
             binding.loadingContainer.visibility = View.VISIBLE
         } else {
-            searchAnim?.let { it.cancel() }
+            searchAnim?.let { it.pause() }
             binding.loadingContainer.visibility = View.GONE
         }
     }

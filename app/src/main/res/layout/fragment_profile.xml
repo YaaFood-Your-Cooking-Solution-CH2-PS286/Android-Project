@@ -44,13 +44,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/primary200"
         android:src="@drawable/ic_add"
         android:tint="@color/primary500"
+        android:visibility="gone"
+        app:fabCustomSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="40dp"
-        app:fabCustomSize="60dp"
-        android:backgroundTint="@color/primary200"/>
+        tools:visibility="visible" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -178,7 +180,7 @@
         android:layout_height="0dp"
         android:background="@color/white"
         android:paddingHorizontal="12dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

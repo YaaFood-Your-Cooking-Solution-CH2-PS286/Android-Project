@@ -42,7 +42,7 @@ class AuthViewModel(
             password = ""
         )
     )
-    val formLogin: LiveData<Login> get() = _formLogin
+    private val formLogin: LiveData<Login> get() = _formLogin
 
     private val userPreferences = UserPreferences.getInstance(application)
 
@@ -147,6 +147,7 @@ class AuthViewModel(
                 ) {
                     if (response.isSuccessful) {
                         val resBody = response.body()
+                        Log.i(TAG, "Success : $it")
                         resBody?.let {
                             viewModelScope.launch {
                                 ApiConfig.setToken(it.accessToken)
@@ -168,7 +169,7 @@ class AuthViewModel(
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Log.e(TAG, t.message.toString())
+                    Log.e(TAG, "Failure : ${t.message.toString()}")
                     _uiState.value = UiState.Error(application.getString(R.string.failed_login))
                 }
             })

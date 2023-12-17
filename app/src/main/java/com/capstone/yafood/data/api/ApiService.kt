@@ -55,8 +55,8 @@ interface ApiService {
         @Part image: MultipartBody.Part,
         @Part("titleArtikel") title: RequestBody,
         @Part("description") description: RequestBody,
-        @Part("ingredient") ingredient: RequestBody,
-        @Part("step") step: RequestBody,
+        @Part("ingredients") ingredients: RequestBody,
+        @Part("steps") steps: RequestBody,
     ): Call<PostArticleResponse>
 
     @Headers("No-Authentication: true")

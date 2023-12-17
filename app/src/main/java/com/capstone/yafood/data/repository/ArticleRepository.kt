@@ -32,6 +32,7 @@ class ArticleRepository {
                 response: Response<ArticleResponse>
             ) {
                 if (response.isSuccessful) {
+                    Log.d(TAG,"${response.body()}")
                     response.body()?.let {
                         state.value = UiState.Success(it.data)
                         Log.d(TAG, it.toString())
@@ -75,7 +76,11 @@ class ArticleRepository {
 //        })
         return liveData
     }
-
+    fun getArticleDetail(articleId: Int): LiveData<Article> {
+        val liveData = MutableLiveData<Article>()
+        liveData.value = FakeData.dummyArticle(articleId)
+        return liveData
+    }
     companion object {
         @Volatile
         private var INSTANCE: ArticleRepository? = null
