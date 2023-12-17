@@ -29,4 +29,10 @@ class ArticleDetailViewModel(
     fun getDetailArticle(): LiveData<Article> = articleId.switchMap {
         articleRepository.getArticleDetail(it)
     }
+
+    fun deleteArticle(articleId: Int, callback: (Boolean) -> Unit) {
+        articleRepository.deleteArticle(articleId) { success ->
+            callback(success)
+        }
+    }
 }

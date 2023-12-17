@@ -79,6 +79,27 @@ class ArticleRepository {
         return liveData
     }
 
+    fun deleteArticle(articleId: Int, callback: (Boolean) -> Unit) {
+        val client = ApiConfig.getApiService().deleteArticle(articleId)
+        client.enqueue(object : Callback<ArticleResponse> {
+            override fun onResponse(call: Call<ArticleResponse>, response: Response<ArticleResponse>) {
+                if (response.isSuccessful) {
+                    Log.d(TAG, "Article deleted successfully")
+                    callback(true)
+                } else {
+                    Log.e(TAG, "Failed to delete article: ${response.code()}")
+                    callback(false)
+                }
+            }
+
+            override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
+                Log.e(TAG, "Failed to delete article: ${t.message}")
+                callback(false)
+            }
+        })
+    }
+
+
     companion object {
         @Volatile
         private var INSTANCE: ArticleRepository? = null

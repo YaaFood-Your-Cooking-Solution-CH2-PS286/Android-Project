@@ -15,6 +15,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -79,4 +80,7 @@ interface ApiService {
 
     @GET("/userByAccessToken")
     fun getUserDetail(): Call<UserDetailResponse>
+
+    @DELETE("articles/{articleId}")
+    fun deleteArticle(@Path("articleId") articleId: Int): Call<ArticleResponse>
 }

@@ -51,7 +51,6 @@ object FakeData {
         0,
         0,
         "",
-        "",
         listOf("Telur", "Garam"),
         listOf("Rebus saja 7 menit", "Kupas Telur"),
     )
@@ -74,7 +73,6 @@ object FakeData {
         ),
         0, 0,
         "Nasi goreng yang sangat amat teramat mantap sekali",
-        "",
         listOf("Telur", "Garam"),
         listOf("Rebus saja 7 menit", "Kupas Telur"),
     )
