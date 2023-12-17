@@ -22,6 +22,7 @@
     <string name="find_other_article">Temukan artikel lainnya</string>
     <string name="find_other_community">Temukan komunitas lainnya</string>
     <string name="success_create_article">Pembuatan artikel berhasil!</string>
+    <string name="input_image_article">Masukkan Gambar pada Artikel ini!</string>
     <string name="failed_create_article">Gagal mengunggah artikel!</string>
     <string name="failed_register">Gagal untuk melakukan pendaftaran!</string>
     <string name="failed_login">Email atau password salah!</string>

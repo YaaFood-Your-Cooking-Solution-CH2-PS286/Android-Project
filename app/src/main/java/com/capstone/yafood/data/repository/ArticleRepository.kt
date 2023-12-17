@@ -14,11 +14,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ArticleRepository {
-    fun getNewstArticles(): LiveData<List<Article>> {
-        val liveData = MutableLiveData<List<Article>>()
-        liveData.value = FakeData.dummyListArticles()
-        return liveData
-    }
 
     fun getUserArticles(
         state: MutableLiveData<UiState<List<Article>>>,
@@ -32,7 +27,7 @@ class ArticleRepository {
                 response: Response<ArticleResponse>
             ) {
                 if (response.isSuccessful) {
-                    Log.d(TAG,"${response.body()}")
+                    Log.d(TAG, "${response.body()}")
                     response.body()?.let {
                         state.value = UiState.Success(it.data)
                         Log.d(TAG, it.toString())
@@ -53,7 +48,6 @@ class ArticleRepository {
 
     fun getDailyArticles(): LiveData<List<Article>> {
         val liveData = MutableLiveData<List<Article>>()
-//        liveData.value = FakeData.dummyListArticles()
 //        val client = ApiConfig.getApiService().getDailyArticle()
 //        client.enqueue(object : Callback<ArticleResponse> {
 //
@@ -64,23 +58,27 @@ class ArticleRepository {
 //                if (response.isSuccessful) {
 //                    val data = response.body()
 //                    data?.let {
-//                        Log.d("GetDailyArticles", response.toString())
+//                        Log.d(TAG, "Daily Articles : ${response.body()}")
 //                        liveData.value = data.data
 //                    }
+//                } else {
+//                    Log.e(TAG, "Daily Articles Error : ${response.errorBody()?.string()}")
 //                }
 //            }
 //
 //            override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
-//                Log.e("GetDailyArticles", t.message.toString())
+//                Log.e(TAG, "Daily Articles Failure : ${t.message.toString()}")
 //            }
 //        })
         return liveData
     }
+
     fun getArticleDetail(articleId: Int): LiveData<Article> {
         val liveData = MutableLiveData<Article>()
         liveData.value = FakeData.dummyArticle(articleId)
         return liveData
     }
+
     companion object {
         @Volatile
         private var INSTANCE: ArticleRepository? = null

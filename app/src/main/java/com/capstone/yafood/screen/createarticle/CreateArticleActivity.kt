@@ -35,7 +35,6 @@ class CreateArticleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateArticleBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
         setupComponents()
     }
 
@@ -76,14 +75,13 @@ class CreateArticleActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun viewModelObserver(bind: ActivityCreateArticleBinding) {
         //set RV Ingredients Input
         viewModel.listIngredientInput.observe(this) {
             bind.rvIngredientsInput.adapter = IngredientInputAdapter(
                 it,
                 viewModel::deleteIngredientInput,
-                viewModel::updateIngredientValue
+                viewModel::updateIngredientValue,
             )
         }
 
@@ -137,6 +135,8 @@ class CreateArticleActivity : AppCompatActivity() {
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
+
+                else -> {}
             }
         }
     }

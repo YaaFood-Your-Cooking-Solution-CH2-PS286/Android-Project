@@ -11,9 +11,9 @@ import com.capstone.yafood.databinding.ItemStepInputBinding
 class StepInputAdapter(
     private val listStepValue: List<String>,
     private val handleDelete: (position: Int) -> Unit,
-    private val handleChange: (text: String, position: Int) -> Unit
+    private val handleChange: (text: String, position: Int) -> Unit,
 
-) : RecyclerView.Adapter<StepInputAdapter.ViewHolder>() {
+    ) : RecyclerView.Adapter<StepInputAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: ItemStepInputBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -29,6 +29,9 @@ class StepInputAdapter(
         holder.binding.apply {
             number.text = "${position + 1}"
             stepInput.setText(stepValue)
+            if (listStepValue.size > 2 && position == listStepValue.size - 1) {
+                stepInput.requestFocus()
+            }
             stepInput.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,

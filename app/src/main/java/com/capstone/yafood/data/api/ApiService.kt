@@ -38,7 +38,8 @@ interface ApiService {
         @Field("query") query: String
     ): Call<RecomendationResponse>
 
-    @GET("/artikel/daily")
+    @Headers("No-Authentication: true")
+    @GET("/randomArtikel")
     fun getDailyArticle(): Call<ArticleResponse>
 
     @GET("/artikel/byUserId/{id}")
@@ -46,8 +47,13 @@ interface ApiService {
         @Path("id") id: Int
     ): Call<ArticleResponse>
 
+    @Headers("No-Authentication: true")
     @GET("/randomResep")
     fun getRandomRecipe(): Call<RandomRecipeResponse>
+
+//    @Headers("No-Authentication: true")
+//    @GET("/Resep/{id}")
+//    suspend fun getRecipeDetail():
 
     @Multipart
     @POST("/uploadArtikel")

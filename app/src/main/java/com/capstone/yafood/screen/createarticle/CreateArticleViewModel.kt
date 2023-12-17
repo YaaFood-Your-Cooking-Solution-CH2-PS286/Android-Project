@@ -75,22 +75,14 @@ class CreateArticleViewModel(
     }
 
     fun postArticle(title: String, description: String) {
-        _uiState.value = UiState.Loading
-        val steps = listStepValue.joinToString("--")
-        val ingredients = listIngredientValue.joinToString("--")
-        Log.d(
-            "Payload", "Title : $title\n" +
-                    "Description: $description\n" +
-                    "ingredients: $ingredients\n" +
-                    "steps: $steps\n"
-        )
-
-        //Just for testing, still waiting API
-//        viewModelScope.launch(Dispatchers.Main) {
-//            delay(1000)
-//            _uiState.value = UiState.Success("App Work")
-//        }
+        val steps = listStepValue.filter { value -> value.isNotEmpty() }.joinToString("--")
+        val ingredients =
+            listIngredientValue.filter { value -> value.isNotEmpty() }.joinToString("--")
+        if (imageUri.value == null) {
+            _uiState.value = UiState.Error(application.getString(R.string.input_image_article))
+        }
         imageUri.value?.let {
+            _uiState.value = UiState.Loading
             val imageFile = ImageUtils.uriToFile(it.toUri(), application)
 
             val reqFile = MultipartBody.Part.createFormData(

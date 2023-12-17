@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.yafood.databinding.ItemIngredientInputBinding
@@ -12,7 +13,8 @@ class IngredientInputAdapter(
     private val listItem: List<String>,
     private val handleDelete: (position: Int) -> Unit,
     private val handleChange: (text: String, position: Int) -> Unit,
-    private val hint: String? = null
+    private val hint: String? = null,
+    private val minPostFocus: Int = 2
 ) : RecyclerView.Adapter<IngredientInputAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: ItemIngredientInputBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -30,6 +32,9 @@ class IngredientInputAdapter(
             ingredientInput.setText(item)
             hint?.let {
                 ingredientInput.hint = it
+            }
+            if (listItem.size > minPostFocus && position == listItem.size - 1) {
+                ingredientInput.requestFocus()
             }
             ingredientInput.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
