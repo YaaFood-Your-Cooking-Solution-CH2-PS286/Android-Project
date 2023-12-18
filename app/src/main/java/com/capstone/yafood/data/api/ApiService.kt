@@ -100,6 +100,6 @@ interface ApiService {
     @GET("/userByAccessToken")
     fun getUserDetail(): Call<UserDetailResponse>
 
-    @DELETE("articles/{articleId}")
+    @DELETE("deleteArticles/{articleId}")
     fun deleteArticle(@Path("articleId") articleId: Int): Call<ArticleResponse>
 }

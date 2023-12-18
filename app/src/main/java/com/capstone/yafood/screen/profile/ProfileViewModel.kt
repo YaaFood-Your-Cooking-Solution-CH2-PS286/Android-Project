@@ -28,11 +28,17 @@ class ProfileViewModel(
         if (userRepository.userPreferences.getToken() != null) {
             userRepository.getUserDetail(_userData)
             if (userId > -1) {
-                articleRepository.getUserArticles(_userArticles, userId)
+                getArticles(userId)
             }
         } else {
             _userData.value = UserState.Unauthorized
         }
     }
 
+    fun getArticles(userId: Int? = null) {
+        articleRepository.getUserArticles(
+            _userArticles,
+            userId ?: userRepository.userPreferences.getUserId()
+        )
+    }
 }

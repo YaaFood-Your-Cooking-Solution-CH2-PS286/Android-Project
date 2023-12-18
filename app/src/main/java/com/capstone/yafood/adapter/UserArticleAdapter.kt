@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.capstone.yafood.data.entity.Article
 import com.capstone.yafood.databinding.ItemUserArticleBinding
 import com.capstone.yafood.screen.articledetail.ArticleDetailActivity
-import com.capstone.yafood.screen.recipedetail.RecipeDetailActivity
 import com.capstone.yafood.utils.ARTICLE_ID
 import com.capstone.yafood.utils.ARTICLE_IMAGE
 import com.capstone.yafood.utils.ARTICLE_INGREDIENT
@@ -20,10 +20,11 @@ import com.capstone.yafood.utils.ARTICLE_TITLE
 import com.capstone.yafood.utils.ARTICLE_USER_ID
 import com.capstone.yafood.utils.ARTICLE_USER_IMAGE
 import com.capstone.yafood.utils.ARTICLE_USER_NAME
-import com.capstone.yafood.utils.RECIPE_ID
+import kotlin.reflect.KProperty0
 
 class UserArticleAdapter(
-    private val listUserArticle: List<Article>
+    private val listUserArticle: List<Article>,
+    private val startActivityResult: ActivityResultLauncher<Intent>,
 ) : RecyclerView.Adapter<UserArticleAdapter.ViewHolder>() {
     inner class ViewHolder(var binding: ItemUserArticleBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -63,7 +64,8 @@ class UserArticleAdapter(
                     itemView.context as Activity,
                     Pair(binding.articleImage, "image"),
                 )
-                itemView.context.startActivity(toDetail, optionsCompat.toBundle())
+                startActivityResult.launch(toDetail, optionsCompat)
+//                itemView.context.startActivity(toDetail, optionsCompat.toBundle())
             }
         }
     }

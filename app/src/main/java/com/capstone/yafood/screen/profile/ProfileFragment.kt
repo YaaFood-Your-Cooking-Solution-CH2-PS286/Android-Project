@@ -1,5 +1,6 @@
 package com.capstone.yafood.screen.profile
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -17,6 +19,7 @@ import com.capstone.yafood.databinding.FragmentProfileBinding
 import com.capstone.yafood.screen.ViewModelFactory
 import com.capstone.yafood.screen.auth.AuthActivity
 import com.capstone.yafood.screen.createarticle.CreateArticleActivity
+import com.capstone.yafood.utils.DELETE_ARTICLE_REQUEST_CODE
 import com.capstone.yafood.utils.ListSpaceDecoration
 import com.capstone.yafood.utils.UserState
 
@@ -25,6 +28,16 @@ class ProfileFragment : Fragment() {
     private val viewModel by activityViewModels<ProfileViewModel> {
         ViewModelFactory.getInstance(requireActivity().application)
     }
+
+    private val startDetailActivityForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result ->
+            Log.d("ResultTest", result.resultCode.toString())
+            if (result.resultCode == DELETE_ARTICLE_REQUEST_CODE) {
+                // Langkah 3: Menerapkan Fungsi Pengambilan Data Ulang
+                viewModel.getArticles()
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,7 +116,8 @@ class ProfileFragment : Fragment() {
                 is UiState.Success -> {
                     bind.articleLoading.visibility = View.GONE
                     if (it.data.isNotEmpty()) {
-                        bind.articlesRecyclerView.adapter = UserArticleAdapter(it.data)
+                        bind.articlesRecyclerView.adapter =
+                            UserArticleAdapter(it.data, startDetailActivityForResult)
                         bind.notHaveArticleContainer.visibility = View.GONE
                         bind.fabAddArticle.visibility = View.VISIBLE
                     } else {
@@ -115,9 +129,14 @@ class ProfileFragment : Fragment() {
         }
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//        Log.d("ProfileFragment", "Test mounting..")
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
     }
+
 }

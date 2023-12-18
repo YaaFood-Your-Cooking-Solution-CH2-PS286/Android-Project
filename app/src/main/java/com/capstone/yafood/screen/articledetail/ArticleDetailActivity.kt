@@ -24,9 +24,9 @@ import com.capstone.yafood.utils.ARTICLE_IMAGE
 import com.capstone.yafood.utils.ARTICLE_INGREDIENT
 import com.capstone.yafood.utils.ARTICLE_STEP
 import com.capstone.yafood.utils.ARTICLE_TITLE
-import com.capstone.yafood.utils.ARTICLE_USER_ID
 import com.capstone.yafood.utils.ARTICLE_USER_IMAGE
 import com.capstone.yafood.utils.ARTICLE_USER_NAME
+import com.capstone.yafood.utils.DELETE_ARTICLE_REQUEST_CODE
 import com.capstone.yafood.utils.UserState
 
 class ArticleDetailActivity : AppCompatActivity() {
@@ -125,6 +125,7 @@ class ArticleDetailActivity : AppCompatActivity() {
         viewModel.deleteArticle(articleId) { success ->
             if (success) {
                 Toast.makeText(this, "Artikel Berhasil dihapus", Toast.LENGTH_SHORT).show()
+                setResult(DELETE_ARTICLE_REQUEST_CODE)
                 finish()
             } else {
                 Toast.makeText(this, "Gagal menghapus artikel", Toast.LENGTH_SHORT).show()

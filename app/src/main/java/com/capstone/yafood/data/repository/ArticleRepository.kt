@@ -168,7 +168,7 @@ class ArticleRepository {
                     Log.d(TAG, "Article deleted successfully")
                     callback(true)
                 } else {
-                    Log.e(TAG, "Failed to delete article: ${response.code()}")
+                    Log.e(TAG, "Failed to delete article: ${response.errorBody()?.string()}")
                     callback(false)
                 }
             }
