@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.yafood.R
 import com.capstone.yafood.data.entity.Article
-import com.capstone.yafood.databinding.ItemArticleBinding
+import com.capstone.yafood.databinding.ItemGridArticleBinding
 import com.capstone.yafood.screen.articledetail.ArticleDetailActivity
 import com.capstone.yafood.utils.ARTICLE_ID
 import com.capstone.yafood.utils.ARTICLE_IMAGE
@@ -22,18 +22,28 @@ import com.capstone.yafood.utils.ARTICLE_USER_ID
 import com.capstone.yafood.utils.ARTICLE_USER_IMAGE
 import com.capstone.yafood.utils.ARTICLE_USER_NAME
 
-class ArticleAdapter(
+class GridArticleAdapter(
     private val listArticles: List<Article>
-) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<GridArticleAdapter.ViewHolder>() {
 
-    inner class ViewHolder(var binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(var binding: ItemGridArticleBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleAdapter.ViewHolder =
-        ViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): GridArticleAdapter.ViewHolder =
+        ViewHolder(
+            ItemGridArticleBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun getItemCount(): Int = listArticles.size
 
-    override fun onBindViewHolder(holder: ArticleAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GridArticleAdapter.ViewHolder, position: Int) {
         val article = listArticles[position]
         Log.d("GetDailyArticles", listArticles.toString())
         holder.apply {
@@ -45,7 +55,9 @@ class ArticleAdapter(
                 .into(binding.userPhotoProfile)
 
             Glide.with(itemView.context).load(article.imageUrl)
-                .placeholder(R.drawable.food_placeholder).into(binding.articleImage)
+                .placeholder(R.drawable.food_placeholder)
+                .error(R.drawable.food_placeholder)
+                .into(binding.articleImage)
             binding.articleTitle.text = article.title
             itemView.setOnClickListener {
                 val toDetail = Intent(itemView.context, ArticleDetailActivity::class.java)

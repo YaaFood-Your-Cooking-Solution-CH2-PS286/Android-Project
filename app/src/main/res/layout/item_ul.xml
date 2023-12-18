@@ -8,17 +8,19 @@
 
     <ImageView
         android:id="@+id/order_icon"
-        android:layout_width="4dp"
-        android:layout_height="4dp"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/circle_shape"
-        app:tint="@color/neutral700" />
+        app:tint="@color/neutral500" />
 
     <TextView
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="4dp"
         android:id="@+id/data_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/neutral700"
-        tools:text="Test" />
+        tools:text="Test"
+        android:textSize="16sp"/>
 </LinearLayout>

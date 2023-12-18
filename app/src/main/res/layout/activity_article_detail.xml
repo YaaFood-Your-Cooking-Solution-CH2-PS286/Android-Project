@@ -6,251 +6,228 @@
     android:layout_height="match_parent"
     tools:context=".screen.articledetail.ArticleDetailActivity">
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_overlay"
+        android:elevation="24dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/more_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_more_vert"
+            app:tint="@color/white" />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_overlay"
-            android:elevation="24dp"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
-                <ImageButton
+            <ImageView
+                android:id="@+id/article_image"
+                android:layout_width="match_parent"
+                android:layout_height="270sp"
+                android:scaleType="centerCrop"
+                android:transitionName="image"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_back"
-                    app:tint="@color/white" />
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/ic_more_vert"
-                    android:layout_width="wrap_content"
+                    <ImageButton
+                        android:id="@+id/ic_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_like"
+                        app:tint="@color/neutral500" />
+
+
+                    <ImageButton
+                        android:id="@+id/ic_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_comment"
+                        app:tint="@color/neutral500" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/article_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_more_vert"
-                    app:tint="@color/white" />
-        </RelativeLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/neutral900"
+                    android:textFontWeight="500"
+                    android:textSize="20sp"
+                    tools:text="@string/dummy_article_title" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginVertical="12dp"
+                    android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/article_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="270sp"
-                            android:scaleType="centerCrop"
-                            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/user_creator_photo"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical"
+                        app:shapeAppearanceOverlay="@style/circular_shape"
+                        tools:srcCompat="@tools:sample/avatars" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:orientation="horizontal"
-                            android:paddingBottom="10dp">
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/user_name"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/user_photo_profile"
+                        app:layout_constraintTop_toTopOf="@+id/user_photo_profile" />
+                </LinearLayout>
 
-                                <ImageView
-                                    android:id="@+id/ic_like"
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_like"
-                                    app:tint="?attr/colorPrimary" />
+                <TextView
+                    android:id="@+id/article_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dummy_article_description"
+                    android:textColor="@color/neutral700" />
 
-                                <TextView
-                                    android:id="@+id/like_count"
-                                    style="@style/h4_style"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="4dp"
-                                    android:text="1" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="?android:attr/listDivider" />
 
-                                <Space
-                                    android:layout_width="16dp"
-                                    android:layout_height="wrap_content" />
+                <TextView
+                    style="@style/h3_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/section_ingredient" />
 
-                                <ImageView
-                                    android:id="@+id/ic_comment"
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_comment"
-                                    app:tint="?attr/colorPrimary" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_ul" />
 
-                                <TextView
-                                    android:id="@+id/comment_count"
-                                    style="@style/h4_style"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="4dp"
-                                    android:text="1" />
-                        </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="?android:attr/listDivider" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="12dp">
+                <TextView
+                    style="@style/h3_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/section_step" />
 
-                                <TextView
-                                    android:id="@+id/article_title"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/neutral900"
-                                    android:textFontWeight="500"
-                                    android:textSize="20sp"
-                                    tools:text="@string/dummy_article_title" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_steps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_ol" />
 
-                        </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="?android:attr/listDivider" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:orientation="horizontal"
-                            android:paddingBottom="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="28dp"
-                                    android:layout_height="28dp"
-                                    android:layout_gravity="center_vertical"
-                                    app:shapeAppearanceOverlay="@style/circular_shape"
-                                    tools:srcCompat="@tools:sample/avatars" />
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_comment"
+                        app:tint="?attr/colorPrimary" />
 
-                                <TextView
-                                    android:id="@+id/user_name"
-                                    android:text="@string/user_name"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:layout_gravity="center"
-                                    android:textSize="16sp"
-                                    app:layout_constraintStart_toEndOf="@+id/user_photo_profile"
-                                    app:layout_constraintTop_toTopOf="@+id/user_photo_profile" />
-                        </LinearLayout>
+                    <TextView
+                        style="@style/h4_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:gravity="center"
+                        android:text="@string/section_give_comment" />
+                </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="24dp">
 
-                                <TextView
-                                    android:id="@+id/article_description"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/dummy_article_description"/>
-                        </LinearLayout>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/user_photo_profile"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical"
+                        app:shapeAppearanceOverlay="@style/circular_shape"
+                        tools:srcCompat="@tools:sample/avatars" />
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginVertical="24dp"
-                            android:background="@color/neutral300"
-                            android:contentDescription="@string/divider" />
-
-                        <TextView
-                            style="@style/h3_style"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="@string/section_ingredient" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_ingredients"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:itemCount="2" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginVertical="24dp"
-                            android:background="@color/neutral300"
-                            android:contentDescription="@string/divider" />
-
-                        <TextView
-                            style="@style/h3_style"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/section_step" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_steps"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:itemCount="2" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginVertical="24dp"
-                            android:background="@color/neutral300"
-                            android:contentDescription="@string/divider" />
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                        <ImageView
-                                            android:layout_width="18dp"
-                                            android:layout_height="18dp"
-                                            android:layout_gravity="center"
-                                            android:src="@drawable/ic_comment"
-                                            app:tint="?attr/colorPrimary" />
-
-                                        <TextView
-                                            style="@style/h4_style"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_marginStart="4dp"
-                                            android:text="@string/section_give_comment" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:orientation="horizontal"
-                                    android:paddingBottom="24dp">
-
-                                        <com.google.android.material.imageview.ShapeableImageView
-                                            android:id="@+id/user_photo_profile"
-                                            android:layout_width="28dp"
-                                            android:layout_height="28dp"
-                                            android:layout_gravity="center_vertical"
-                                            app:shapeAppearanceOverlay="@style/circular_shape"
-                                            tools:srcCompat="@tools:sample/avatars" />
-
-                                        <com.google.android.material.textfield.TextInputEditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_vertical"
-                                            android:layout_marginStart="4dp"
-                                            android:background="@drawable/capsule_border"
-                                            android:hint="@string/hint_give_comment"
-                                            android:paddingHorizontal="8dp"
-                                            android:paddingVertical="4dp"
-                                            android:textSize="12sp" />
-                                </LinearLayout>
-                        </LinearLayout>
-                </androidx.core.widget.NestedScrollView>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="4dp"
+                        android:background="@drawable/capsule_border"
+                        android:hint="@string/hint_give_comment"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

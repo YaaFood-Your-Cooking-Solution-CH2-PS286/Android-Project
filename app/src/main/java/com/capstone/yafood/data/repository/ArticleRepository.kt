@@ -8,12 +8,35 @@ import com.capstone.yafood.data.FakeData
 import com.capstone.yafood.data.api.ApiConfig
 import com.capstone.yafood.data.api.response.ArticleResponse
 import com.capstone.yafood.data.entity.Article
-import com.capstone.yafood.data.entity.Recipe
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ArticleRepository {
+
+    fun getAllArticles(state: MutableLiveData<UiState<List<Article>>>) {
+        state.value = UiState.Loading
+        ApiConfig.getApiService().getAllArticle().enqueue(object : Callback<ArticleResponse> {
+            override fun onResponse(
+                call: Call<ArticleResponse>,
+                response: Response<ArticleResponse>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        state.value = UiState.Success(it.data)
+                    }
+                } else {
+                    Log.e(TAG, "Failure : ${response.errorBody()?.string()}")
+                    state.value = UiState.Error(response.errorBody()?.string() ?: "Error")
+                }
+            }
+
+            override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
+                state.value = UiState.Error(t.message.toString())
+                Log.e(TAG, "Failure : ${t.message}")
+            }
+        })
+    }
 
     fun getUserArticles(
         state: MutableLiveData<UiState<List<Article>>>,
@@ -48,29 +71,84 @@ class ArticleRepository {
 
     fun getDailyArticles(): LiveData<List<Article>> {
         val liveData = MutableLiveData<List<Article>>()
-//        val client = ApiConfig.getApiService().getDailyArticle()
-//        client.enqueue(object : Callback<ArticleResponse> {
-//
-//            override fun onResponse(
-//                call: Call<ArticleResponse>,
-//                response: Response<ArticleResponse>
-//            ) {
-//                if (response.isSuccessful) {
-//                    val data = response.body()
-//                    data?.let {
-//                        Log.d(TAG, "Daily Articles : ${response.body()}")
-//                        liveData.value = data.data
-//                    }
-//                } else {
-//                    Log.e(TAG, "Daily Articles Error : ${response.errorBody()?.string()}")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
-//                Log.e(TAG, "Daily Articles Failure : ${t.message.toString()}")
-//            }
-//        })
+        val client = ApiConfig.getApiService().getDailyArticle()
+        client.enqueue(object : Callback<ArticleResponse> {
+
+            override fun onResponse(
+                call: Call<ArticleResponse>,
+                response: Response<ArticleResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    data?.let {
+                        Log.d(TAG, "Daily Articles : ${response.body()}")
+                        liveData.value = data.data
+                    }
+                } else {
+                    Log.e(TAG, "Daily Articles Error : ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
+                Log.e(TAG, "Daily Articles Failure : ${t.message.toString()}")
+            }
+        })
         return liveData
+    }
+
+    fun getRandomArticles(state: MutableLiveData<UiState<List<Article>>>, count: Int? = null) {
+        state.value = UiState.Loading
+        ApiConfig.getApiService().getDailyArticle(count)
+            .enqueue(object : Callback<ArticleResponse> {
+                override fun onResponse(
+                    call: Call<ArticleResponse>,
+                    response: Response<ArticleResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        data?.let {
+                            Log.d(TAG, "Daily Articles : ${response.body()}")
+                            state.value = UiState.Success(data.data)
+                        }
+                    } else {
+                        state.value =
+                            UiState.Error(
+                                response.errorBody()?.string() ?: "Error ${response.code()}"
+                            )
+                        Log.e(TAG, "Daily Articles Error : ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
+                    state.value = UiState.Error(t.message.toString())
+                    Log.e(TAG, "Daily Articles Failure : ${t.message.toString()}")
+                }
+            })
+    }
+
+    fun findArticles(state: MutableLiveData<UiState<List<Article>>>, query: String) {
+        state.value = UiState.Loading
+        ApiConfig.getApiService().findArticles(query).enqueue(object : Callback<ArticleResponse> {
+            override fun onResponse(
+                call: Call<ArticleResponse>,
+                response: Response<ArticleResponse>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        state.value = UiState.Success(it.data)
+                    }
+                } else {
+                    Log.e(TAG, "Error : ${response.errorBody()?.string()}")
+                    state.value =
+                        UiState.Error(response.errorBody()?.string() ?: "Error ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
+                Log.e(TAG, "Failure : ${t.message}")
+                state.value = UiState.Error(t.message.toString())
+            }
+        })
     }
 
     fun getArticleDetail(articleId: Int): LiveData<Article> {
@@ -82,7 +160,10 @@ class ArticleRepository {
     fun deleteArticle(articleId: Int, callback: (Boolean) -> Unit) {
         val client = ApiConfig.getApiService().deleteArticle(articleId)
         client.enqueue(object : Callback<ArticleResponse> {
-            override fun onResponse(call: Call<ArticleResponse>, response: Response<ArticleResponse>) {
+            override fun onResponse(
+                call: Call<ArticleResponse>,
+                response: Response<ArticleResponse>
+            ) {
                 if (response.isSuccessful) {
                     Log.d(TAG, "Article deleted successfully")
                     callback(true)

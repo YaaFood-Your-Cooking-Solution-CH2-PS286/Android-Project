@@ -2,6 +2,7 @@ package com.capstone.yafood.data.api
 
 import com.capstone.yafood.data.api.requestbody.Login
 import com.capstone.yafood.data.api.requestbody.Register
+import com.capstone.yafood.data.api.response.ArticleDetailResponse
 import com.capstone.yafood.data.api.response.ArticleResponse
 import com.capstone.yafood.data.api.response.LoginResponse
 import com.capstone.yafood.data.api.response.PostArticleResponse
@@ -24,6 +25,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -40,13 +42,30 @@ interface ApiService {
     ): Call<RecomendationResponse>
 
     @Headers("No-Authentication: true")
+    @GET("/allArtikel")
+    fun getAllArticle(): Call<ArticleResponse>
+
+    @Headers("No-Authentication: true")
     @GET("/randomArtikel")
-    fun getDailyArticle(): Call<ArticleResponse>
+    fun getDailyArticle(
+        @Query("limit") limit: Int? = null
+    ): Call<ArticleResponse>
 
     @GET("/artikel/byUserId/{id}")
     fun getUserArticle(
         @Path("id") id: Int
     ): Call<ArticleResponse>
+
+    @FormUrlEncoded
+    @POST("/searchArticle")
+    fun findArticles(
+        @Field("query") query: String
+    ): Call<ArticleResponse>
+
+    @GET("/artikel/{id}")
+    fun getArticleDetail(
+        @Path("id") id: Int
+    ): Call<ArticleDetailResponse>
 
     @Headers("No-Authentication: true")
     @GET("/randomResep")

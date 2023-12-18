@@ -3,6 +3,7 @@ package com.capstone.yafood.screen.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.capstone.yafood.UiState
 import com.capstone.yafood.data.entity.Article
 import com.capstone.yafood.data.entity.Community
 import com.capstone.yafood.data.entity.RecipeIdea
@@ -20,15 +21,18 @@ class HomeViewModel(
     private val communityRepository: CommunityRepository
 ) : ViewModel() {
     private val _userState = MutableLiveData<UserState<User>>()
+    private val _recipeIdea = MutableLiveData<UiState<RecipeIdea>>()
+    val recipeIdea: LiveData<UiState<RecipeIdea>> get() = _recipeIdea
     val userState: LiveData<UserState<User>> get() = _userState
     fun getNewestArticles(): LiveData<List<Article>> = articleRepository.getDailyArticles()
 
-    fun getRecipeIdea(): LiveData<RecipeIdea> = recipeRepository.getRecipeIdea()
+//    fun getRecipeIdea(): LiveData<RecipeIdea> = recipeRepository.getRecipeIdea()
 
     fun getCommunities(): LiveData<List<Community>> = communityRepository.getRandomCommunity()
 
     init {
         userRepository.getUserDetail(_userState)
+        recipeRepository.getRecipeIdea(_recipeIdea)
     }
 
 }

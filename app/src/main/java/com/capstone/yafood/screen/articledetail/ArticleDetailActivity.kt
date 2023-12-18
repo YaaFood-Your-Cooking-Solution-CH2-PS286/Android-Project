@@ -2,6 +2,7 @@ package com.capstone.yafood.screen.articledetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
@@ -9,10 +10,13 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.capstone.yafood.R
+import com.capstone.yafood.UiState
 import com.capstone.yafood.adapter.OrderList
 import com.capstone.yafood.adapter.OrderListAdapter
 import com.capstone.yafood.adapter.UnorderList
 import com.capstone.yafood.adapter.UnorderListAdapter
+import com.capstone.yafood.data.entity.Article
+import com.capstone.yafood.data.entity.User
 import com.capstone.yafood.databinding.ActivityArticleDetailBinding
 import com.capstone.yafood.screen.ViewModelFactory
 import com.capstone.yafood.utils.ARTICLE_ID
@@ -20,6 +24,10 @@ import com.capstone.yafood.utils.ARTICLE_IMAGE
 import com.capstone.yafood.utils.ARTICLE_INGREDIENT
 import com.capstone.yafood.utils.ARTICLE_STEP
 import com.capstone.yafood.utils.ARTICLE_TITLE
+import com.capstone.yafood.utils.ARTICLE_USER_ID
+import com.capstone.yafood.utils.ARTICLE_USER_IMAGE
+import com.capstone.yafood.utils.ARTICLE_USER_NAME
+import com.capstone.yafood.utils.UserState
 
 class ArticleDetailActivity : AppCompatActivity() {
 
@@ -28,6 +36,7 @@ class ArticleDetailActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(application)
     }
 
+    private var userId = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityArticleDetailBinding.inflate(layoutInflater)
@@ -37,29 +46,60 @@ class ArticleDetailActivity : AppCompatActivity() {
         val imageUrl = intent.getStringExtra(ARTICLE_IMAGE) ?: ""
         val ingredients = intent.getStringExtra(ARTICLE_INGREDIENT) ?: ""
         val procedure = intent.getStringExtra(ARTICLE_STEP) ?: ""
-//            bind.likeCount.text = it.likeCount.toString()
-//            bind.commentCount.text = it.commentCount.toString()
-//            bind.articleDescription.text = it.description
-//        viewModel.setArticleId(articleId)
-//        setupComponents()
-        bind(title, imageUrl, ingredients, procedure)
-        binding?.icMoreVert?.setOnClickListener {
-            showPopupMenu(it, articleId)
+
+        val userCreatedName = intent.getStringExtra(ARTICLE_USER_NAME) ?: ""
+        val userCreatedImageUrl = intent.getStringExtra(ARTICLE_USER_IMAGE) ?: ""
+
+        viewModel.setArticleId(articleId)
+
+        setupContent(imageUrl, title, ingredients, procedure, userCreatedName, userCreatedImageUrl)
+        binding?.let {
+            viewModelObserver(it)
         }
     }
 
-    private fun bind(imageUrl: String, name: String, ingredients: String, procedure: String) {
+    private fun setupContent(
+        imageUrl: String,
+        name: String,
+        ingredients: String,
+        procedure: String,
+        userCreatedName: String,
+        userCreatedImageUrl: String
+    ) {
+        bind(
+            imageUrl,
+            name,
+            ingredients.split("--"),
+            procedure.split("--"),
+            userCreatedName,
+            userCreatedImageUrl
+        )
+    }
+
+    private fun bind(
+        imageUrl: String,
+        name: String,
+        ingredients: List<String>,
+        procedure: List<String>,
+        userCreatedName: String,
+        userCreatedImageUrl: String
+    ) {
         binding?.let { bind ->
             Glide.with(this).load(imageUrl)
                 .placeholder(R.drawable.food_placeholder)
+                .error(R.drawable.food_placeholder)
                 .into(bind.articleImage)
+            Glide.with(this).load(userCreatedImageUrl).placeholder(R.drawable.ic_chef)
+                .into(bind.userCreatorPhoto)
+            bind.userName.text = userCreatedName
+
             bind.articleTitle.text = name
             bind.rvIngredients.adapter =
                 UnorderListAdapter(
-                    ingredients.split("--").map { ingredient -> UnorderList(ingredient) })
+                    ingredients.map { ingredient -> UnorderList(ingredient) })
             bind.rvSteps.adapter =
                 OrderListAdapter(
-                    procedure.split("--").mapIndexed { index, step -> OrderList(index, step) })
+                    procedure.mapIndexed { index, step -> OrderList(index, step) })
         }
     }
 
@@ -73,6 +113,7 @@ class ArticleDetailActivity : AppCompatActivity() {
                     deleteArticle(articleId)
                     true
                 }
+
                 else -> false
             }
         }
@@ -91,37 +132,45 @@ class ArticleDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun viewModelObserver(bind: ActivityArticleDetailBinding) {
+        viewModel.user.observe(this) {
+            if (it is UserState.Success) {
+                Glide.with(this)
+                    .load(it.data.photoUrl)
+                    .placeholder(R.drawable.ic_chef)
+                    .into(bind.userPhotoProfile)
+                userId = it.data.id
+            }
+        }
 
-//    private fun setupComponents() {
-//        binding?.let {
-////            viewModelObserver(it)
-//        }
-//    }
-//
-//    private fun viewModelObserver(bind: ActivityArticleDetailBinding) {
-//        viewModel.user.observe(this) {
-//            if (it is UserState.Success) {
-//                Glide.with(this)
-//                    .load(it.data.photoUrl)
-//                    .placeholder(R.drawable.ic_person_circle)
-//                    .into(bind.userPhotoProfile)
-//            }
-//        }
-//        viewModel.getDetailArticle().observe(this) {
-//            Glide.with(this).load(it.imageUrl)
-//                .placeholder(R.drawable.food_placeholder)
-//                .into(bind.articleImage)
-//            bind.articleTitle.text = it.title
-//            bind.likeCount.text = it.likeCount.toString()
-//            bind.commentCount.text = it.commentCount.toString()
-//            bind.articleDescription.text = it.description
-//            bind.rvIngredients.adapter =
-//                UnorderListAdapter(it.ingredients.map { ingredient -> UnorderList(ingredient) })
-//            bind.rvSteps.adapter =
-//                OrderListAdapter(it.procedure.mapIndexed { index, step -> OrderList(index, step) })
-//
-//        }
-//    }
+        viewModel.uiState.observe(this) { state ->
+            when (state) {
+                is UiState.Error -> Toast.makeText(this, state.errorMessage, Toast.LENGTH_SHORT)
+                    .show()
+
+                UiState.Loading -> {}
+                is UiState.Success -> {
+                    state.data.apply {
+                        bind(
+                            imageUrl,
+                            title,
+                            ingredients,
+                            procedure,
+                            userCreated.name,
+                            userCreated.photoUrl ?: ""
+                        )
+                        binding?.articleDescription?.text = description
+//                        Log.d("Test", "$userId : ${userCreated.id}")
+                        if (userId > -1 && userId == userCreated.id) {
+                            bind.moreMenu.setOnClickListener { view ->
+                                showPopupMenu(view, id)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -48,7 +48,7 @@
     <string name="description_input_placeholder">Deskripsikan tentang makanan ini. Tentang asal masakan ini? manfaat dari makanan? kandungan gizi?</string>
     <string name="ingredient_input_placeholder">100gram tempe</string>
     <string name="delete_ingredient">delete ingredient</string>
-    <string name="add_bahan_input">Bahan</string>
+    <string name="add_ingredient_input">Bahan</string>
     <string name="add_steps_input">Langkah</string>
     <string name="step_input_placeholder">Potong tempe</string>
     <string name="input_email_placeholder">email</string>
@@ -73,4 +73,5 @@
     <string name="searchbar_hint">Search</string>
     <string name="hint_give_comment">Beri Komentar</string>
     <string name="user_name">Bagus</string>
+    <string name="article_undifined">Maaf kami tidak menemukann artikel yang anda cari</string>
 </resources>

@@ -110,17 +110,23 @@
             android:textFontWeight="600"
             android:textSize="18sp" />
 
+        <ProgressBar
+            android:id="@+id/recipe_idea_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminateTint="?attr/colorPrimary"
+            android:visibility="gone" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/recipe_idea_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recipe_idea">
+            app:cardCornerRadius="8dp">
 
             <LinearLayout
+                android:id="@+id/recipe_idea_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

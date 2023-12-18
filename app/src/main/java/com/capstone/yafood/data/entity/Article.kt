@@ -12,7 +12,10 @@ data class Article(
     val likeCount: Int = 0,
     val commentCount: Int = 0,
     val description: String,
-    @field:SerializedName("contentArtikel")
+
+    @field:SerializedName("ingredients")
     val ingredients: List<String>,
+
+    @field:SerializedName("steps")
     val procedure: List<String>
 )

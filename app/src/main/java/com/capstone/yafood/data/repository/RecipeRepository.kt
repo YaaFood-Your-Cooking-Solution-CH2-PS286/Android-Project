@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.capstone.yafood.UiState
 import com.capstone.yafood.data.FakeData
 import com.capstone.yafood.data.api.ApiConfig
 import com.capstone.yafood.data.api.response.RandomRecipeResponse
@@ -15,8 +16,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RecipeRepository {
-    fun getRecipeIdea(): LiveData<RecipeIdea> {
-        val liveData = MutableLiveData<RecipeIdea>()
+    fun getRecipeIdea(state: MutableLiveData<UiState<RecipeIdea>>) {
+        state.value = UiState.Loading
         val client = ApiConfig.getApiService().getRandomRecipe()
         client.enqueue(object : Callback<RandomRecipeResponse> {
             override fun onResponse(
@@ -26,18 +27,19 @@ class RecipeRepository {
                 if (response.isSuccessful) {
                     Log.i(TAG, "Recipe Idea : ${response.body()}")
                     response.body()?.let {
-                        liveData.value = it.data
+                        state.value = UiState.Success(it.data)
                     }
                 } else {
+                    state.value = UiState.Error(response.errorBody()?.string() ?: "Error")
                     Log.e(TAG, "Recipe Idea Error: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<RandomRecipeResponse>, t: Throwable) {
-                Log.e(TAG, "Recipe Idea Failure: ${t.message.toString()}")
+                state.value = UiState.Error(t.message.toString())
+                Log.e(TAG, "Recipe Idea Failure: ${t.message}")
             }
         })
-        return liveData
     }
 
     fun getRecipeDetail(recipeId: Int): LiveData<Recipe> {

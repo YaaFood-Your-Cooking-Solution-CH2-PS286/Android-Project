@@ -15,6 +15,7 @@ import com.capstone.yafood.screen.profile.ProfileViewModel
 import com.capstone.yafood.screen.recipedetail.RecipeDetailViewModel
 import com.capstone.yafood.screen.recomendation.AddIngredientsViewModel
 import com.capstone.yafood.screen.recomendation.RecomendationViewModel
+import com.capstone.yafood.screen.search.SearchViewModel
 import com.capstone.yafood.screen.snapcook.SnapViewModel
 import com.capstone.yafood.screen.splash.SplashViewModel
 
@@ -93,6 +94,11 @@ class ViewModelFactory private constructor(private val application: Application)
 
             (modelClass.isAssignableFrom(AddIngredientsViewModel::class.java)) -> {
                 return AddIngredientsViewModel() as T
+            }
+
+            (modelClass.isAssignableFrom(SearchViewModel::class.java)) -> {
+                val articleRepository = ArticleRepository.getInstance()
+                return SearchViewModel(articleRepository) as T
             }
         }
 

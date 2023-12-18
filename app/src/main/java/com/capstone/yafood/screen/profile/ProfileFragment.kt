@@ -78,8 +78,8 @@ class ProfileFragment : Fragment() {
                     }
                     Glide.with(this)
                         .load(it.data.photoUrl)
-                        .error(R.drawable.ic_person_circle)
-                        .placeholder(requireActivity().getDrawable(R.drawable.ic_person_circle))
+                        .error(R.drawable.ic_chef)
+                        .placeholder(requireActivity().getDrawable(R.drawable.ic_chef))
                         .into(bind.userPhotoProfile)
                 }
 
@@ -93,14 +93,15 @@ class ProfileFragment : Fragment() {
         viewModel.userArticles.observe(viewLifecycleOwner) {
             when (it) {
                 is UiState.Error -> {
-
+                    bind.articleLoading.visibility = View.GONE
                 }
 
                 UiState.Loading -> {
-
+                    bind.articleLoading.visibility = View.VISIBLE
                 }
 
                 is UiState.Success -> {
+                    bind.articleLoading.visibility = View.GONE
                     if (it.data.isNotEmpty()) {
                         bind.articlesRecyclerView.adapter = UserArticleAdapter(it.data)
                         bind.notHaveArticleContainer.visibility = View.GONE

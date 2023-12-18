@@ -246,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center_vertical"
-                        android:text="@string/add_bahan_input"
+                        android:text="@string/add_ingredient_input"
                         android:textColor="@color/neutral500"
                         android:textFontWeight="600" />
                 </LinearLayout>
