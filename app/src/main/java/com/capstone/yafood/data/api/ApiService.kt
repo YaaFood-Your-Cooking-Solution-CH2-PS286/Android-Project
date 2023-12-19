@@ -1,5 +1,6 @@
 package com.capstone.yafood.data.api
 
+import com.capstone.yafood.adapter.LogoutResponse
 import com.capstone.yafood.data.api.requestbody.Login
 import com.capstone.yafood.data.api.requestbody.Register
 import com.capstone.yafood.data.api.response.ArticleDetailResponse
@@ -9,6 +10,7 @@ import com.capstone.yafood.data.api.response.PostArticleResponse
 import com.capstone.yafood.data.api.response.RandomRecipeResponse
 import com.capstone.yafood.data.api.response.RecomendationResponse
 import com.capstone.yafood.data.api.response.RegisterResponse
+import com.capstone.yafood.data.api.response.UpdateProfileResponse
 import com.capstone.yafood.data.api.response.UserDetailResponse
 import com.capstone.yafood.data.entity.Article
 import com.capstone.yafood.data.entity.Ingredient
@@ -102,4 +104,13 @@ interface ApiService {
 
     @DELETE("deleteArticles/{articleId}")
     fun deleteArticle(@Path("articleId") articleId: Int): Call<ArticleResponse>
+
+    @Multipart
+    @POST("/uploadFotoProfile")
+    fun changePhotoProfile(
+        @Part image: MultipartBody.Part
+    ): Call<UpdateProfileResponse>
+
+    @DELETE("logout")
+    fun logout(): Call<LogoutResponse>
 }

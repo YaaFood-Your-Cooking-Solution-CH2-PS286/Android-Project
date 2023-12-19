@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YaFood</string>
+    <string name="app_name">YaaFood</string>
     <string name="recomendation_screen_label">Rekomendasi Resep</string>
     <string name="tagline">Dapatkan Resep Kreatif Tanpa Ribet!</string>
     <string name="profile">Profile</string>
@@ -74,4 +74,10 @@
     <string name="hint_give_comment">Beri Komentar</string>
     <string name="user_name">Bagus</string>
     <string name="article_undifined">Maaf kami tidak menemukann artikel yang anda cari</string>
+    <string name="settings_label">Pengaturan</string>
+    <string name="edit_photo_profile">Ubah foto profile</string>
+    <string name="yes">Iya</string>
+    <string name="cancel">Ga jadi deh</string>
+    <string name="logout_confirmation">Yakin mau keluar nih ?</string>
+    <string name="label_logout">Keluar akun</string>
 </resources>

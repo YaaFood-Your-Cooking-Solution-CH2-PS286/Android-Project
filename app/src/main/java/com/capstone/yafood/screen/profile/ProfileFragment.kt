@@ -19,8 +19,10 @@ import com.capstone.yafood.databinding.FragmentProfileBinding
 import com.capstone.yafood.screen.ViewModelFactory
 import com.capstone.yafood.screen.auth.AuthActivity
 import com.capstone.yafood.screen.createarticle.CreateArticleActivity
+import com.capstone.yafood.screen.settings.SettingsActivity
 import com.capstone.yafood.utils.DELETE_ARTICLE_REQUEST_CODE
 import com.capstone.yafood.utils.ListSpaceDecoration
+import com.capstone.yafood.utils.USER_NAME
 import com.capstone.yafood.utils.UserState
 
 class ProfileFragment : Fragment() {
@@ -34,7 +36,6 @@ class ProfileFragment : Fragment() {
         { result ->
             Log.d("ResultTest", result.resultCode.toString())
             if (result.resultCode == DELETE_ARTICLE_REQUEST_CODE) {
-                // Langkah 3: Menerapkan Fungsi Pengambilan Data Ulang
                 viewModel.getArticles()
             }
         }
@@ -80,15 +81,27 @@ class ProfileFragment : Fragment() {
     private fun viewModelObserve(bind: FragmentProfileBinding) {
         viewModel.userData.observe(viewLifecycleOwner) {
             when (it) {
-                UserState.Loading -> {}
+                UserState.Loading -> {
+                    bind.settingButton.visibility = View.GONE
+                }
+
                 is UserState.Success -> {
                     bind.loginContainer.visibility = View.GONE
                     bind.fabAddArticle.visibility = View.VISIBLE
+                    bind.settingButton.visibility = View.VISIBLE
                     bind.apply {
                         headerText.text = it.data.email
                         userName.text = it.data.name
                         rank.text = "Pemasak Handal (${it.data.rankPoints})"
                     }
+
+                    bind.settingButton.setOnClickListener { _ ->
+                        val toSettings = Intent(requireActivity(), SettingsActivity::class.java)
+                        toSettings.putExtra(USER_NAME, it.data.name)
+                        toSettings.putExtra(USER_NAME, it.data.email)
+                        startActivity(toSettings)
+                    }
+
                     Glide.with(this)
                         .load(it.data.photoUrl)
                         .error(R.drawable.ic_chef)
@@ -97,6 +110,7 @@ class ProfileFragment : Fragment() {
                 }
 
                 UserState.Unauthorized -> {
+                    bind.settingButton.visibility = View.GONE
                     bind.loginContainer.visibility = View.VISIBLE
                     bind.fabAddArticle.visibility = View.GONE
                     bind.userName.text = requireActivity().application.getString(R.string.profile)
@@ -128,11 +142,6 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        Log.d("ProfileFragment", "Test mounting..")
-//    }
 
     override fun onDestroy() {
         super.onDestroy()

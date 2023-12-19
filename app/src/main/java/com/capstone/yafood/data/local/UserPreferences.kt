@@ -30,14 +30,6 @@ class UserPreferences(private val context: Context) {
         sharedPreferences.edit().putInt(USER_ID, id).apply()
     }
 
-    fun getUserName(): String {
-        return sharedPreferences.getString(USER_NAME, null) ?: "undifined name"
-    }
-
-    fun saveUserName(name: String) {
-        sharedPreferences.edit().putString(USER_NAME, name).apply()
-    }
-
     companion object {
         private const val PREFS_NAME = "user_pref"
         private const val KEY_TOKEN = "token"

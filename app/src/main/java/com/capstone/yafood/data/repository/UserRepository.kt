@@ -42,6 +42,10 @@ class UserRepository(private val context: Context) {
         })
     }
 
+    fun clearUserData() {
+        userPreferences.clearUser()
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: UserRepository? = null

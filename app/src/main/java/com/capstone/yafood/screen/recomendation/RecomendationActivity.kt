@@ -63,7 +63,6 @@ class RecomendationActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener { finish() }
         binding.btnRetakePhoto.setOnClickListener { finish() }
         binding.btnManualInput.setOnClickListener {
-            setVisibleErrorView(false)
             handleAddIngredient()
         }
     }
