@@ -1,5 +1,6 @@
 package com.capstone.yafood.screen.articledetail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import com.capstone.yafood.adapter.UnorderList
 import com.capstone.yafood.adapter.UnorderListAdapter
 import com.capstone.yafood.databinding.ActivityArticleDetailBinding
 import com.capstone.yafood.screen.ViewModelFactory
+import com.capstone.yafood.screen.auth.AuthActivity
 import com.capstone.yafood.utils.ARTICLE_ID
 import com.capstone.yafood.utils.ARTICLE_IMAGE
 import com.capstone.yafood.utils.ARTICLE_INGREDIENT
@@ -26,6 +28,7 @@ import com.capstone.yafood.utils.ARTICLE_USER_IMAGE
 import com.capstone.yafood.utils.ARTICLE_USER_NAME
 import com.capstone.yafood.utils.DELETE_ARTICLE_REQUEST_CODE
 import com.capstone.yafood.utils.UserState
+import com.google.android.material.snackbar.Snackbar
 
 class ArticleDetailActivity : AppCompatActivity() {
 
@@ -55,10 +58,6 @@ class ArticleDetailActivity : AppCompatActivity() {
         setupContent(imageUrl, title, ingredients, procedure, userCreatedName, userCreatedImageUrl)
         binding?.let {
             viewModelObserver(it)
-            it.btnComment.setOnClickListener {
-                Log.d("ArticleId", articleId.toString())
-                commentsFragment?.show(supportFragmentManager, CommentsFragment.TAG)
-            }
         }
     }
 
@@ -145,6 +144,13 @@ class ArticleDetailActivity : AppCompatActivity() {
                     bind.commentTotal.text = count.toString()
                 }
             }
+            bind.btnComment.setOnClickListener { _ ->
+                if (it is UserState.Success) {
+                    commentsFragment?.show(supportFragmentManager, CommentsFragment.TAG)
+                } else {
+                    showLoginSuggestion()
+                }
+            }
         }
 
         viewModel.uiState.observe(this) { state ->
@@ -174,6 +180,20 @@ class ArticleDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showLoginSuggestion() {
+        val snackbar = Snackbar.make(
+            findViewById(android.R.id.content),
+            getString(R.string.no_login_will_comment),
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.setAction("Login") {
+            // Arahkan pengguna ke Login Activity
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
+        }
+        snackbar.show()
     }
 
     override fun onDestroy() {

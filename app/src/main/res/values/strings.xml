@@ -30,6 +30,7 @@
     <string name="success_register">Berhasil melakukan pendaftaran! Silahkan melakukan login</string>
     <string name="success_update_profile">Berhasil mengubah profile!</string>
     <string name="failed_update_profile">Gagal mengubah profile!</string>
+    <string name="no_login_will_comment">Lakukan login terlebih dahulu</string>
 
     <string name="dummy_article_title">Nasi Goreng Megalodon </string>
     <string name="dummy_article_user">Bagus Sudirman</string>

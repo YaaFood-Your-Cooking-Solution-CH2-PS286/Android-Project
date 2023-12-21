@@ -45,9 +45,6 @@ class SettingsActivity : AppCompatActivity() {
     private fun setComponents() {
         binding?.let {
             viewModelObserver(it)
-            it.btnLogout.setOnClickListener {
-                viewModel.logout()
-            }
             it.btnSaveEdit.setOnClickListener { _ ->
                 viewModel.updateProfile()
             }
@@ -156,7 +153,7 @@ class SettingsActivity : AppCompatActivity() {
         alertDialog.apply {
             setTitle(getString(R.string.label_logout))
             setMessage(getString(R.string.logout_confirmation))
-            setPositiveButton(getString(R.string.yes)) { dialog, id ->
+            setPositiveButton(getString(R.string.yes)) { _, _ ->
                 viewModel.logout()
                 Runtime.getRuntime().exit(0)
             }

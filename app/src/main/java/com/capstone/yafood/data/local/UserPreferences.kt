@@ -17,9 +17,9 @@ class UserPreferences(private val context: Context) {
     }
 
     fun clearUser() {
-        sharedPreferences.edit().remove(KEY_TOKEN).apply()
-        sharedPreferences.edit().remove(USER_NAME).apply()
-        sharedPreferences.edit().remove(USER_ID).apply()
+        sharedPreferences.edit().remove(KEY_TOKEN).commit()
+        sharedPreferences.edit().remove(USER_NAME).commit()
+        sharedPreferences.edit().remove(USER_ID).commit()
     }
 
     fun getUserId(): Int {
