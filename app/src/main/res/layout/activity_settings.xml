@@ -38,6 +38,26 @@
             android:textSize="16sp" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/loading_contrainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#50FEF7DD"
+        android:elevation="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar">
+
+        <ProgressBar
+            android:id="@+id/loading_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="128dp"
+            android:indeterminateTint="?attr/colorPrimary" />
+    </RelativeLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,6 +82,7 @@
                     android:id="@+id/user_photo_profile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     app:shapeAppearanceOverlay="@style/circular_shape"
                     tools:src="@tools:sample/avatars" />
 
@@ -134,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
-                android:text="Simpan Perubahan"
+                android:text="@string/save_update"
                 android:textFontWeight="600"
                 android:textSize="16sp" />
 

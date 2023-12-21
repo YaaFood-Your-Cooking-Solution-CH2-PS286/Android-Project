@@ -5,8 +5,10 @@ import com.capstone.yafood.data.api.requestbody.Login
 import com.capstone.yafood.data.api.requestbody.Register
 import com.capstone.yafood.data.api.response.ArticleDetailResponse
 import com.capstone.yafood.data.api.response.ArticleResponse
+import com.capstone.yafood.data.api.response.GetCommentResponse
 import com.capstone.yafood.data.api.response.LoginResponse
 import com.capstone.yafood.data.api.response.PostArticleResponse
+import com.capstone.yafood.data.api.response.PostCommentResponse
 import com.capstone.yafood.data.api.response.RandomRecipeResponse
 import com.capstone.yafood.data.api.response.RecomendationResponse
 import com.capstone.yafood.data.api.response.RegisterResponse
@@ -111,6 +113,28 @@ interface ApiService {
         @Part image: MultipartBody.Part
     ): Call<UpdateProfileResponse>
 
+    @FormUrlEncoded
+    @POST("/updateprofile")
+    fun updateProfile(
+        @Field("name") name: String,
+        @Field("email") email: String,
+    ): Call<UpdateProfileResponse>
+
     @DELETE("logout")
     fun logout(): Call<LogoutResponse>
+
+    @FormUrlEncoded
+    @POST("/artikel/comment/{articleId}")
+    fun postComment(
+        @Path("articleId")
+        articleId: Int,
+        @Field("contentComment")
+        comment: String
+    ): Call<PostCommentResponse>
+
+    @GET("/articles/{articleId}/comments")
+    fun getCommentByArticle(
+        @Path("articleId")
+        articleId: Int
+    ): Call<GetCommentResponse>
 }

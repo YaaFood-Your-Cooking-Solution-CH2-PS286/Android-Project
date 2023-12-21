@@ -1,5 +1,6 @@
 package com.capstone.yafood.data.repository
 
+import android.nfc.Tag
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +8,9 @@ import com.capstone.yafood.UiState
 import com.capstone.yafood.data.FakeData
 import com.capstone.yafood.data.api.ApiConfig
 import com.capstone.yafood.data.api.response.ArticleResponse
+import com.capstone.yafood.data.api.response.GetCommentResponse
 import com.capstone.yafood.data.entity.Article
+import com.capstone.yafood.data.entity.Comment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

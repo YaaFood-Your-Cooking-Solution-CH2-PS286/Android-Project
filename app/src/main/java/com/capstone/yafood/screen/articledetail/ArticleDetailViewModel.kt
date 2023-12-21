@@ -9,6 +9,7 @@ import com.capstone.yafood.UiState
 import com.capstone.yafood.data.api.ApiConfig
 import com.capstone.yafood.data.api.response.ArticleDetailResponse
 import com.capstone.yafood.data.entity.Article
+import com.capstone.yafood.data.entity.Comment
 import com.capstone.yafood.data.entity.Recipe
 import com.capstone.yafood.data.entity.User
 import com.capstone.yafood.data.repository.ArticleRepository
@@ -24,6 +25,7 @@ class ArticleDetailViewModel(
 ) : ViewModel() {
     private val _uiState = MutableLiveData<UiState<Article>>()
     val uiState: LiveData<UiState<Article>> get() = _uiState
+
     fun setArticleId(id: Int) {
         ApiConfig.getApiService().getArticleDetail(id)
             .enqueue(object : Callback<ArticleDetailResponse> {
@@ -38,7 +40,7 @@ class ArticleDetailViewModel(
                         }
                     } else {
                         _uiState.value = UiState.Error(
-                            response.errorBody()?.string() ?: "Tidak dapat mengambbil detail"
+                            response.errorBody()?.string() ?: "Tidak dapat mengambil detail"
                         )
                         Log.e(TAG, "Error $TAG : ${response.errorBody()?.string()}")
                     }

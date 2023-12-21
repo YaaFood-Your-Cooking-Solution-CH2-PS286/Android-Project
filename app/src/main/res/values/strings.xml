@@ -28,6 +28,8 @@
     <string name="failed_login">Email atau password salah!</string>
     <string name="success_login">Login Berhasil! Hello %s</string>
     <string name="success_register">Berhasil melakukan pendaftaran! Silahkan melakukan login</string>
+    <string name="success_update_profile">Berhasil mengubah profile!</string>
+    <string name="failed_update_profile">Gagal mengubah profile!</string>
 
     <string name="dummy_article_title">Nasi Goreng Megalodon </string>
     <string name="dummy_article_user">Bagus Sudirman</string>
@@ -80,4 +82,7 @@
     <string name="cancel">Ga jadi deh</string>
     <string name="logout_confirmation">Yakin mau keluar nih ?</string>
     <string name="label_logout">Keluar akun</string>
+    <string name="save_update">Simpan Perubahan</string>
+    <string name="comment">Komentar</string>
+    <string name="other_article">Artikel Lainnya</string>
 </resources>

@@ -15,8 +15,6 @@ import com.capstone.yafood.adapter.OrderList
 import com.capstone.yafood.adapter.OrderListAdapter
 import com.capstone.yafood.adapter.UnorderList
 import com.capstone.yafood.adapter.UnorderListAdapter
-import com.capstone.yafood.data.entity.Article
-import com.capstone.yafood.data.entity.User
 import com.capstone.yafood.databinding.ActivityArticleDetailBinding
 import com.capstone.yafood.screen.ViewModelFactory
 import com.capstone.yafood.utils.ARTICLE_ID
@@ -36,12 +34,15 @@ class ArticleDetailActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(application)
     }
 
+    private var commentsFragment: CommentsFragment? = null
+
     private var userId = -1
+    private var articleId = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityArticleDetailBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        val articleId = intent.getIntExtra(ARTICLE_ID, -1)
+        articleId = intent.getIntExtra(ARTICLE_ID, -1)
         val title = intent.getStringExtra(ARTICLE_TITLE) ?: ""
         val imageUrl = intent.getStringExtra(ARTICLE_IMAGE) ?: ""
         val ingredients = intent.getStringExtra(ARTICLE_INGREDIENT) ?: ""
@@ -51,10 +52,13 @@ class ArticleDetailActivity : AppCompatActivity() {
         val userCreatedImageUrl = intent.getStringExtra(ARTICLE_USER_IMAGE) ?: ""
 
         viewModel.setArticleId(articleId)
-
         setupContent(imageUrl, title, ingredients, procedure, userCreatedName, userCreatedImageUrl)
         binding?.let {
             viewModelObserver(it)
+            it.btnComment.setOnClickListener {
+                Log.d("ArticleId", articleId.toString())
+                commentsFragment?.show(supportFragmentManager, CommentsFragment.TAG)
+            }
         }
     }
 
@@ -136,11 +140,10 @@ class ArticleDetailActivity : AppCompatActivity() {
     private fun viewModelObserver(bind: ActivityArticleDetailBinding) {
         viewModel.user.observe(this) {
             if (it is UserState.Success) {
-                Glide.with(this)
-                    .load(it.data.photoUrl)
-                    .placeholder(R.drawable.ic_chef)
-                    .into(bind.userPhotoProfile)
                 userId = it.data.id
+                commentsFragment = CommentsFragment(articleId, it.data.photoUrl ?: "") { count ->
+                    bind.commentTotal.text = count.toString()
+                }
             }
         }
 
